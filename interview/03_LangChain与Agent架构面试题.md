@@ -1,6 +1,6 @@
-# 🎓 LangChain 框架、Agent 智能体架构与 MCP 协议面试高频题
+# 🎓 LangChain 框架、Agent 智能体架构与 MCP 协议面试高频题 (全量进阶版)
 
-> 本文档深入探讨 LangChain 核心架构设计、ReAct 智能体范式、上下文与记忆系统、安全护栏Guardrails 以及 Anthropic MCP 交互协议。
+> 本文档深入探讨 LangChain 核心架构设计、ReAct 智能体范式、上下文与记忆系统、安全护栏 Guardrails 以及 Anthropic MCP 交互协议。
 
 ---
 
@@ -24,11 +24,11 @@
 - **LLM 类 (Text-in, Text-out)**：
   - 输入：纯文本字符串（String）。
   - 输出：纯文本字符串（String）。
-  - 代表模型：补全模型（如 GPT-3 `text-davinci-003`、基础 Base 模型）。
+  - 代表模型：基础补全模型（如 GPT-3 `text-davinci-003`）。
 - **ChatModel 类 (Messages-in, Message-out)**：
   - 输入：结构化消息列表（List of `BaseMessage`，包括 `SystemMessage`, `HumanMessage`, `AIMessage`, `ToolMessage`）。
   - 输出：结构化的 `AIMessage` 对象（可能包含 `tool_calls` 工具调用签名）。
-  - 代表模型：对话模型（GPT-4o, Claude 3.5 Sonnet, Qwen 2.5 Instruct）。现代 Agent 应用开发基本全面转向 `ChatModel`。
+  - 代表模型：现代对话模型（GPT-4o, Claude 3.5, Qwen 2.5）。
 
 ---
 
@@ -47,7 +47,16 @@
 
 ---
 
-### Q4: 如何在 LangChain 中实现高准确率的 Function Calling / Tool Calling？Prompt 工程与 Schema 设计有哪些要点？
+### Q4: 什么是 Agentic RAG？它与传统 Linear RAG (Query ➔ Retrieve ➔ Generate) 的本质区别？
+**标准回答**：
+- **传统 Linear RAG 局限**：一刀切流程。用户发问 ➔ 检索向量库 ➔ 丢给 LLM 生成。无法处理复杂多步骤检索、查询改写、结果判定与补充查询。
+- **Agentic RAG 核心机制**：
+  - 将检索动作当做 Agent 可动态调用的 **Tool**。
+  - Agent 自主判断是否需要检索、检索哪个向量库、检索结果是否满意。若检索结果质量差，Agent 可以自行重新改写 Query 再次检索（Query Rewriting），或者路由到 Web Search 补全信息。
+
+---
+
+### Q5: 如何在 LangChain 中实现高准确率的 Function Calling / Tool Calling？Prompt 工程与 Schema 设计有哪些要点？
 **标准回答**：
 1. **使用 Pydantic 定义严密 Schema**：
    - 为工具入参指定精准的类型提示（Type Hints）、`Field(description="...")` 属性说明和枚举限制（Enum）。
@@ -60,35 +69,31 @@
 
 ## 三、 Agent 记忆系统与上下文管理
 
-### Q5: 请对比 ConversationBufferMemory、VectorStoreRetrieverMemory 与 SummaryMemory，并说明长对话场景下的 Token 控制策略。
+### Q6: 请对比 ConversationBufferMemory、VectorStoreRetrieverMemory 与 SummaryMemory，并说明长对话场景下的 Token 控制策略。
 **标准回答**：
 - **记忆类型对比**：
-  - **ConversationBufferMemory**：无损保存所有历史对话。优点：上下文最完整；缺点：随着对话轮数增加，Token 快速超限且开销线性飙升。
-  - **ConversationSummaryMemory**：后台调用 LLM 将旧对话压缩总结为简短摘要。优点：控制 Token 占用；缺点：有信息丢失风险，增加额外的 LLM 调用开销。
-  - **VectorStoreRetrieverMemory**：将历史对话切块写入向量数据库，仅检索与当前问题语义相似的 Top-K 相关记忆。优点：适合超长期持久记忆；缺点：丢失严格的时间先后顺序链条。
+  - **ConversationBufferMemory**：无损保存所有历史对话。上下文最完整，但 Token 快速超限且开销线性飙升。
+  - **ConversationSummaryMemory**：后台调用 LLM 将旧对话压缩总结为简短摘要。控制 Token 占用，但有细节信息丢失风险。
+  - **VectorStoreRetrieverMemory**：将历史对话切块写入向量数据库，仅检索与当前问题语义相似的 Top-K 相关记忆。适合超长期持久记忆。
 - **生产环境混合控制策略 (Hybrid Strategy)**：
   - **固定窗口 + 矢量检索 + 摘要**：保留最近 N 轮对话原样 (Buffer Window) + 检索历史关联数据 (RAG Memory) + 超出范围自动滚动压缩 (Summary Window)。
 
 ---
 
-### Q6: 什么是 Guardrails（安全护栏）？在 Agent 系统中如何实现输入防注入与输出结构校验？
-**Standard Answer**：
+### Q7: 什么是 Guardrails（安全护栏）？在 Agent 系统中如何实现输入防注入与输出结构校验？
+**标准回答**：
 - **定义**：Guardrails 是位于用户与 LLM、以及 LLM 与外部系统之间的**安全防护层**，确保 Agent 的输入输出符合安全合规、隐私保护及结构化格式要求。
 - **核心实现机制**：
-  1. **输入护栏 (Input Guardrails)**：
-     - 使用轻量级分类模型（如 Llama Guard）或正则判定识别越狱攻击（Jailbreak）、提示词注入（Prompt Injection）与 PII 敏感隐私泄露。
-  2. **输出护栏 (Output Guardrails)**：
-     - 格式校验：利用 Pydantic Output Parser / Guardrails.ai 校验 JSON 结构，格式非法时自动触发重试（Re-ask）。
-     - 内容安全：过滤幻觉（Hallucination Detection）、政治敏感词与非法指令执行。
+  1. **输入护栏 (Input Guardrails)**：使用分类模型（如 Llama Guard）或正则判定识别越狱攻击（Jailbreak）、提示词注入（Prompt Injection）与 PII 敏感隐私泄露。
+  2. **输出护栏 (Output Guardrails)**：利用 Pydantic Output Parser 校验 JSON 结构，格式非法时自动触发重试（Re-ask）；过滤幻觉与政治敏感词。
 
 ---
 
 ## 四、 MCP (Model Context Protocol) 模型上下文协议
 
-### Q7: 什么是 Anthropic 提出的 MCP (Model Context Protocol) 协议？它解决了大模型应用开发的什么痛点？
+### Q8: 什么是 Anthropic 提出的 MCP (Model Context Protocol) 协议？它解决了大模型应用开发的什么痛点？
 **标准回答**：
-- **解决的痛点**：
-  - 在 MCP 出现前，每个 AI 应用/Agent 都要为不同的数据源（GitLab, Postgres, Jira, Slack 等）重复编写私有的 API 适配组件，导致生态割裂、维护成本高昂（类似于 USB 接口出现前的万能适配器难题）。
+- **解决的痛点**：在 MCP 出现前，每个 AI 应用/Agent 都要为不同的数据源（GitLab, Postgres, Jira, Slack 等）重复编写私有的 API 适配组件，导致生态割裂、维护成本高昂。
 - **MCP 核心概念与架构**：
   - **标准协议**：MCP 规定了基于 JSON-RPC 2.0 的统一开放协议标准。
   - **三层架构**：
@@ -99,3 +104,12 @@
   1. **Resources（资源）**：向 LLM 暴露安全的读取数据源（如文件、数据库记录）。
   2. **Prompts（提示词模板）**：服务器预定义的高级 Prompt 模版。
   3. **Tools（工具）**：向 LLM 暴露可执行的函数或写操作 API。
+
+---
+
+### Q9: 在 MCP 架构中，MCP Client 如何实现工具的动态发现与注册？
+**标准回答**：
+1. **连接建立与能力协商**：MCP Client 与 MCP Server 通过 Stdio 或 SSE 建立 JSON-RPC 管道，完成 `initialize` 握手。
+2. **工具列表拉取 (Tools Discovery)**：Client 发送 `tools/list` 请求，Server 返回可用的工具 Schema 列表（名称、描述、JSON Schema 入参）。
+3. **动态绑定**：Client 将 Server 返回的工具列表转换为 LangChain 的 `BaseTool` 或 LLM 原生的 Tool 描述格式并注入给 LLM。
+4. **工具触发与回调**：当 LLM 发起工具调用时，Client 发送 `tools/call` 请求给 Server，Server 执行本地代码后将结果返回给 Client。

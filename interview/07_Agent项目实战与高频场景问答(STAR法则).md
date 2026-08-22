@@ -1,6 +1,6 @@
-# 🎓 Agent 项目实战与高频场景问答 (16K-22K STAR 法则表达模版)
+# 🎓 Agent 项目实战与高频场景问答 (16K-22K STAR 法则表达模版全量版)
 
-> 本文档专为 16K-22K 岗位面试准备，提供基于 STAR 法则（情境-任务-行动-结果）的 Agent 真实项目介绍模版，以及“项目中遇到的最大难点”、“Agent 幻觉与死循环解决”等高频行为面试题。
+> 本文档专为 16K-22K 岗位面试准备，提供基于 STAR 法则（情境-任务-行动-结果）的 Agent 真实项目介绍模版，以及“项目中遇到的最大难点”、“大模型 API 故障降级”、“Agent 幻觉与死循环解决”等高频行为面试题。
 
 ---
 
@@ -42,7 +42,18 @@
 
 ---
 
-### Q2: 如何解决 Agent 在生成结构化 JSON 输出时的格式崩塌或幻觉问题？
+### Q2: 如果上游大模型 API 突然发生网络抖动或服务故障 (如 HTTP 500 / 429 Rate Limit)，你的 Agent 系统架构如何保证高可用？
+**标准回答**：
+1. **多厂商模型降级路由 (Provider Fallback)**：
+   - 使用统一网关层（如 One-API / LiteLLM）。主路优先调用云端 API（如 GPT-4o / Claude 3.5）；一旦遇到 5xx 报错或超时，自动无缝切到备用模型（如 Qwen-2.5-Max 或本地部署的 DeepSeek-V3）。
+2. **退避重试 (Exponential Backoff with Jitter)**：
+   - 针对 HTTP 429 (Rate Limit)，采用带随机抖动（Jitter）的指数退避重试算法，防止所有并发请求在同一时刻重试造成二次冲垮。
+3. **断点持久化与恢复**：
+   - 依赖 LangGraph 的 Checkpointer，即使当前步骤因模型故障彻底中断，用户的对话 State 依然完整保存在数据库中。等待 API 恢复后，用户刷新页面调用 `resume` 即可从上次故障步骤继续往下执行，无需重新运行前置节点。
+
+---
+
+### Q3: 如何解决 Agent 在生成结构化 JSON 输出时的格式崩塌或幻觉问题？
 **标准回答**：
 1. **优先使用厂商原生 Function Calling / Structured Output API**：如 OpenAI / Anthropic / Qwen 提供的结构化输出功能，避免让模型在纯文本格式下手动拼接 JSON 字符串。
 2. **Pydantic 结合 OutputParser 校验与自动重试**：
@@ -52,7 +63,17 @@
 
 ---
 
-### Q3: 面试官追问：“如果让你重新架构目前的 Agent 系统，你会做哪些优化？”
+### Q4: 在 Agent 调用多个外部 API 写入数据库时，如何保证操作的“原子性”与事务回滚（Saga 模式）？
+**标准回答**：
+- **痛点**：LLM 无法像传统数据库那样开启原生的 ACID 事务。若 Agent 先调用了“订机票 API”成功，接着调用“订酒店 API”失败，订机票的操作必须被回滚。
+- **解决方案（Saga 模式与补偿事务）**：
+  1. 为每一个具有写操作的 Tool 匹配一个反向的**补偿工具 (Compensating Action)**（如 `book_flight` 对应 `cancel_flight`）。
+  2. 在 LangGraph 的全局 State 中记录已经成功执行的写操作步队列 `executed_actions = []`。
+  3. 当后续节点报错或人工审批拒绝时，图分支自动路由到 `Rollback_Node`，逆序遍历 `executed_actions` 依次调用对应补偿工具撤销操作，保证系统数据一致性。
+
+---
+
+### Q5: 面试官追问：“如果让你重新架构目前的 Agent 系统，你会做哪些优化？”
 **标准回答**：
 1. **进一步引入 MCP 协议规范**：将分散在各个微服务里的工具函数打包为符合 Anthropic MCP 标准的 MCP Server，实现工具能力的统一复用与跨应用解耦。
 2. **构建完善的评测与 Observability 闭环**：结合 **LangSmith / Ragas** 建立离线自动化 Eval 测试集，每次 Prompt 或模型版本迭代前，自动运行评测集确保准确率无回归 (No Regression)。

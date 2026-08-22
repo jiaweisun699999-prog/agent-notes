@@ -1,6 +1,6 @@
-# 🎓 LangGraph 状态机、多 Agent 协作与状态持久化面试高频题
+# 🎓 LangGraph 状态机、多 Agent 协作与状态持久化面试高频题 (全量进阶版)
 
-> 本文档深入剖析基于 LangGraph 的可控状态图 (StateGraph)、Pregel 引擎机制、Checkpointer 与 Store 存储区别、人工干预 (Interrupt) 与容错设计。
+> 本文档深入剖析基于 LangGraph 的可控状态图 (StateGraph)、Pregel 引擎机制、Checkpointer 与 Store 存储区别、多 Agent 协作网络、人工干预 (Interrupt) 与容错设计。
 
 ---
 
@@ -8,9 +8,7 @@
 
 ### Q1: 为什么在构建复杂 Agent 系统时推荐使用 LangGraph 而非传统的 LangChain AgentExecutor？
 **标准回答**：
-- **传统的 AgentExecutor 局限性**：
-  - 基于线性/单单环 ReAct 架构，难以控制流程。
-  - 缺乏透明的状态管理，难以实现分支循环、并行节点、子图嵌套以及精确的状态打断与恢复。
+- **传统的 AgentExecutor 局限性**：基于线性/单环 ReAct 架构，难以控制流程。缺乏透明的状态管理，难以实现分支循环、并行节点、子图嵌套以及精确的状态打断与恢复。
 - **LangGraph 的核心优势**：
   1. **显式状态驱动 (StateGraph)**：基于图论（Directed Graph），每个节点 (Node) 显式地读取并更新全局状态对象 (State)。
   2. **支持循环与分支 (Cycles & Branching)**：原生支持环路图（可受控循环迭代）与条件边 (Conditional Edges)。
@@ -30,7 +28,7 @@
 
 ---
 
-## 二、 状态管理：Checkpointer 与 Store 的深度区别
+## 二、 状态管理与多 Agent 协作网络
 
 ### Q3: 请深入对比 LangGraph 中的 Checkpointer（短期/会话记忆）与 Store（长期/跨会话记忆）的应用场景与区别。
 **标准回答**：
@@ -44,12 +42,23 @@
 
 ---
 
-### Q4: 如何利用 Checkpointer 实现 LangGraph 的“时间旅行 (Time-Travel)”与状态改写 (State Editing)？
+### Q4: 详细介绍 LangGraph 中构建多 Agent 协作的三种主流架构模式（Supervisor 模式、Network 网络模式、Hierarchical 分层模式）。
+**标准回答**：
+1. **Supervisor（主管中心模式）**：
+   - 由一个中央 Supervisor Node 充当指挥官，根据用户需求路由分发任务给子 Agent Node（如 Worker_A, Worker_B），子 Agent 执行完毕后把结果交回 Supervisor 决策下一动作。
+2. **Network / Swarm（点对点网络模式）**：
+   - 去中心化。Agent 节点之间通过条件边直接 handoff 转移控制权（如 Agent_A 处理完退款校验后，直接通过 `goto("Agent_B")` 转移给发票开具 Agent）。
+3. **Hierarchical（分层树状模式）**：
+   - 适用于大型复杂工程。顶层 Supervisor 管理若干子图 (Subgraphs)，每个子图内部拥有独立的局部状态和子 Supervisor。
+
+---
+
+### Q5: 如何利用 Checkpointer 实现 LangGraph 的“时间旅行 (Time-Travel)”与状态改写 (State Editing)？
 **标准回答**：
 - **原理**：Checkpointer 在每个 Superstep 结束时都会自动保存一份包含版本号的 `Checkpoint` 对象。
 - **操作步骤**：
   1. **获取历史快照**：通过 `app.get_state_history(config)` 遍历指定 `thread_id` 的所有历史 Checkpoint 列表。
-  2. **状态查阅**：选中某个特定步骤的 `checkpoint_id`（如第 3 步生成非法结果时的快照）。
+  2. **选中目标快照**：选中某个特定步骤的 `checkpoint_id`。
   3. **改写状态并分叉 (Fork)**：
      ```python
      config = {"configurable": {"thread_id": "1", "checkpoint_id": "target_checkpoint_id"}}
@@ -63,7 +72,7 @@
 
 ## 三、 人机协同 (Human-in-the-Loop) 与中断机制
 
-### Q5: 详细说明 LangGraph 中 `interrupt()` 函数与 `interrupt_before` / `interrupt_after` 的工作原理，如何实现人工审批？
+### Q6: 详细说明 LangGraph 中 `interrupt()` 函数与 `interrupt_before` / `interrupt_after` 的工作原理，如何实现人工审批？
 **标准回答**：
 - **`interrupt()` 函数模式（推荐细粒度控制）**：
   - 在节点内部调用 `value = interrupt({"question": "是否批准调用删除 API？"})`。
@@ -77,17 +86,17 @@
 
 ## 四、 图容错与流式模式 (Streaming)
 
-### Q6: 在 LangGraph 中如何处理节点故障？简述 Retry Policy 与 Fallback 机制。
+### Q7: 在 LangGraph 中如何处理节点故障？简述 Retry Policy 与 Fallback 机制。
 **标准回答**：
 - **节点级重试 (Retry Policy)**：
-  - 定义 `RetryPolicy` 参数：可配置 `initial_interval`（初始间隔）、`backoff_factor`（指数退避因子）、`max_attempts`（最大重试次数）以及 `retry_on`（特定异常类型）。
+  - 定义 `RetryPolicy` 参数：配置 `initial_interval`、`backoff_factor`（指数退避）、`max_attempts` 及 `retry_on` 异常类型。
   - 在添加节点时挂载：`workflow.add_node("api_node", api_func, retry=RetryPolicy(max_attempts=3))`。
 - **降级分支 (Fallback / Exceptional Edges)**：
-  - 当节点重试依然失败时，可通过捕捉异常并在条件边 (Conditional Edge) 中路由到备用降级节点（如 `fallback_node`），重置 State 或调用低阶模型返回提示，保证图不崩溃。
+  - 当节点重试依然失败时，在条件边 (Conditional Edge) 中路由到备用降级节点（如 `fallback_node`），重置 State 或调用低阶模型返回提示，保证图不崩溃。
 
 ---
 
-### Q7: 说明 LangGraph 中 `stream` 方法的不同模式 (`values`, `updates`, `messages`, `custom`) 的适用场景。
+### Q8: 说明 LangGraph 中 `stream` 方法的不同模式 (`values`, `updates`, `messages`, `custom`) 的适用场景。
 **标准回答**：
 - **`values` 模式**：每个 Superstep 结束时返回**完整的全局 State 字典**。适合用来更新 UI 上全量的状态看板。
 - **`updates` 模式**：每个 Superstep 结束时仅返回**当前节点输出的状态增量 (Delta)**。适合用来监控特定节点的执行结果。

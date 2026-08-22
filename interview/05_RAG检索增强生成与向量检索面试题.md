@@ -1,6 +1,6 @@
-# 🎓 RAG 检索增强生成与向量检索面试高频题 (16K-22K 进阶篇)
+# 🎓 RAG 检索增强生成与向量检索面试高频题 (全量进阶版)
 
-> 本文档聚焦企业级 RAG (Retrieval-Augmented Generation) 架构、文本切块策略、向量数据库 (Milvus/Pgvector) 索引原理、混合检索与重排序 (Rerank) 调优。
+> 本文档聚焦企业级 RAG (Retrieval-Augmented Generation) 架构、文本切块策略、向量数据库 (Milvus/Pgvector) 索引原理、多模态 RAG、混合检索与重排序 (Rerank) 调优。
 
 ---
 
@@ -88,7 +88,27 @@
 
 ---
 
-### Q6: RAG 系统的核心指标如何评估？（介绍 Ragas 评估框架）
+### Q6: 向量检索中的标量过滤 (Scalar Filtering) 有哪些实现方式？预过滤 (Pre-filtering) vs 后过滤 (Post-filtering) 的区别？
+**标准回答**：
+- **后过滤 (Post-filtering)**：先对全量向量进行 Top-K 最近邻检索，然后再从 Top-K 结果中过滤掉不满足属性条件（如 `tenant_id == 'A'`）的记录。
+  - 缺点：极易导致最终返回的结果数远远少于 K，甚至返回空集合。
+- **预过滤 (Pre-filtering)**：在向量检索之前或检索过程中（Single-stage Filtering），先通过标量索引（如 B-Tree、Bitset 掩码）过滤出满足条件的候选向量集合，再在该集合内进行向量距离计算。
+  - 优势：生产环境标准选型（如 Milvus / Qdrant 支持原生高效单阶段预过滤）。
+
+---
+
+### Q7: 向量余弦相似度 (Cosine Similarity)、点积 (Dot Product) 与欧氏距离 (Euclidean / L2) 的数学关系与选型？
+**标准回答**：
+- **欧氏距离 (L2 Distance)**：计算高维空间中两点间的绝对直线距离，数值越小越相似。对向量的模长非常敏感。
+- **余弦相似度 (Cosine Similarity)**：计算两个向量夹角的余弦值，取值区间 $[-1, 1]$，数值越大越相似。只关注向量方向，忽略模长大小。
+- **内积 / 点积 (Inner Product, IP)**：计算两个向量的点积 $\sum a_i b_i$。
+- **数学关联与选型**：当向量已经做过**单位归一化 (L2 Normalized)** 之后，点积在数值上与余弦相似度完全等价，且点积在 GPU/CPU 上可以利用矩阵乘法直接加速。因此推荐预先对向量归一化，检索时直接选用内积 (IP) 索引。
+
+---
+
+## 四、 RAG 评测与多模态扩展
+
+### Q8: RAG 系统的核心指标如何评估？（介绍 Ragas 评估框架）
 **标准回答**：
 - **Ragas 框架四大评估指标**：
   1. **Faithfulness（忠实度 / 拒绝幻觉）**：回答的内容是否完全基于检索到的上下文，是否存在胡乱捏造。
