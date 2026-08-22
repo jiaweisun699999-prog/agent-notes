@@ -115,6 +115,18 @@ graph TD
 
 ---
 
+### 🎓 模块七：AI 大模型 & 云原生高频面试专区 (Interview Q&A)
+> 汇总基础设施、Python 底层、LLM 理论算法、Agent 与 LangGraph 图网络高频面试题及标准解答。
+
+| 序号 | 专题面试名称 | 覆盖核心面试考点 | 快速跳转 |
+| :---: | :--- | :--- | :---: |
+| 01 | **云原生容器化与 Python 高频面试题** | Namespace/cgroups 隔离、Overlay2 联合挂载、K8s 架构与 Service 负载均衡、`__new__`/`__init__` 区别、GC 分代回收与 GIL 锁解决 | [📄 阅读文档](./interview/01_云原生与Python高频面试题.md) |
+| 02 | **大模型基础与 Transformer 理论面试题** | Self-Attention 点积放缩推导、MHA/MQA/GQA 演进、RoPE 旋转位置编码、Pre-LN 优势、LoRA 低秩微调与 INT4/INT8 量化原理 | [📄 阅读文档](./interview/02_大模型与Transformer理论面试题.md) |
+| 03 | **LangChain 与 Agent 架构面试题** | LCEL 管道符原理、ReAct 智能体 Loop 流程、长短记忆协同与 Token 截断、Guardrails 安全护栏、Anthropic MCP 协议三层架构 | [📄 阅读文档](./interview/03_LangChain与Agent架构面试题.md) |
+| 04 | **LangGraph 状态机与工作流面试题** | StateGraph vs AgentExecutor 优势、Pregel 引擎 Superstep 机制、Checkpointer 与 Store 区别、Time-Travel 时间旅行、`interrupt()` 人工介入 | [📄 阅读文档](./interview/04_LangGraph高级工作流面试题.md) |
+
+---
+
 ## 🛠️ 本地阅读与使用指南 (Getting Started)
 
 1. **克隆仓库到本地**：
