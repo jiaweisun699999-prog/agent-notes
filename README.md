@@ -124,6 +124,9 @@ graph TD
 | 02 | **大模型基础与 Transformer 理论面试题** | Self-Attention 点积放缩推导、MHA/MQA/GQA 演进、RoPE 旋转位置编码、Pre-LN 优势、LoRA 低秩微调与 INT4/INT8 量化原理 | [📄 阅读文档](./interview/02_大模型与Transformer理论面试题.md) |
 | 03 | **LangChain 与 Agent 架构面试题** | LCEL 管道符原理、ReAct 智能体 Loop 流程、长短记忆协同与 Token 截断、Guardrails 安全护栏、Anthropic MCP 协议三层架构 | [📄 阅读文档](./interview/03_LangChain与Agent架构面试题.md) |
 | 04 | **LangGraph 状态机与工作流面试题** | StateGraph vs AgentExecutor 优势、Pregel 引擎 Superstep 机制、Checkpointer 与 Store 区别、Time-Travel 时间旅行、`interrupt()` 人工介入 | [📄 阅读文档](./interview/04_LangGraph高级工作流面试题.md) |
+| 05 | **RAG 检索增强生成与向量检索面试题** | 递归/语义切块、BM25+Dense 双路混合检索、RRF 融合与 Cross-Encoder Rerank、HyDE 假设性嵌入、HNSW 与 IVFFlat 向量索引 | [📄 阅读文档](./interview/05_RAG检索增强生成与向量检索面试题.md) |
+| 06 | **大模型推理加速、性能调优与评估监控面试题** | vLLM/PagedAttention 显存优化、Continuous Batching、TTFT 与 TPOT 延迟调优、Token 成本控制、LangSmith 与 Ragas 评估 | [📄 阅读文档](./interview/06_大模型推理加速、性能调优与评估监控面试题.md) |
+| 07 | **Agent 项目实战与高频场景问答 (STAR法则)** | 16K-22K STAR 法则项目介绍模版、Agent 死循环与工具幻觉应对、JSON 格式化容错、生产环境可观测性与架构优化 | [📄 阅读文档](./interview/07_Agent项目实战与高频场景问答(STAR法则).md) |
 
 ---
 
