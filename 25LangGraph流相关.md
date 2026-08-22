@@ -1,4 +1,4 @@
-# ![image.png](./images/25LangGraph流相关_724f6ca7c34948b091d2aaaf2b07e410_f568aa.png)6\. **LangGraph 流相关**
+# 6\. **LangGraph 流相关**
 
 ## 6.1. **LangGraph流式输出模式**
 
