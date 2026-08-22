@@ -5,14 +5,18 @@
   <img src="https://img.shields.io/badge/Language-Python%20%7C%20Markdown-green?style=for-the-badge&logo=python" alt="Language">
   <img src="https://img.shields.io/badge/Framework-LangChain%20%7C%20LangGraph-orange?style=for-the-badge&logo=chainlink" alt="Framework">
   <img src="https://img.shields.io/badge/Infra-Docker%20%7C%20Kubernetes-dh?style=for-the-badge&logo=docker" alt="Infra">
+  <img src="https://img.shields.io/badge/Status-Actively%20Updated-brightgreen?style=for-the-badge&logo=github" alt="Status">
 </p>
 
 > 本仓库汇集了从 **云原生基础设施 (Docker/K8s)** 到 **Python 高级编程**、**机器学习/Transformer 大模型理论**，再到 **LangChain / Agent / MCP 协议** 以及 **LangGraph 状态机图网络** 的全栈知识体系与落地实战总结。
+
+> 🔄 **持续更新声明**：本仓库为个人 AI 大模型与云原生技术的**长期持续更新知识库**。后续将不断补充最新的 LLM 前沿理论、Agent 架构演进、MCP 扩展协议、LangGraph 进阶模式及生产环境踩坑总结。建议点击 **Star ⭐️** 或 **Watch 👀** 保持关注！
 
 ---
 
 ## 💡 仓库特色 (Highlights)
 
+- 🔄 **动态演进**：作者保持长期持续更新，紧跟 AI 与云原生技术前沿，不断补充最新的技术总结与项目实战经验。
 - 🧱 **全栈贯通**：涵盖底层云原生容器基础设施、Python 底层机制、大模型理论算法与上层 Agent 应用层开发。
 - 📊 **模块化分类**：将 28 篇核心学习文档划分为 6 大主题模块，循序渐进，查阅高效。
 - 🎯 **深度落地**：不仅包含核心概念剖析，更包含踩坑经验、运行时上下文管理、记忆系统、人工介入与安全护栏等真实生产环境实战总结。
