@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](../README.md)** / **面试高频题专区**
+> 🏠 [返回主页 README](../README.md) \| ⚡ [面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md) \| 💻 [白板手写代码](./08_大厂手写代码与白板编程题.md)
+
+---
+
 # 🎓 LangChain 框架、Agent 智能体架构与 MCP 协议面试高频题 (全量进阶版)
 
 > 本文档深入探讨 LangChain 核心架构设计、ReAct 智能体范式、上下文与记忆系统、安全护栏 Guardrails 以及 Anthropic MCP 交互协议。
@@ -113,3 +118,6 @@
 2. **工具列表拉取 (Tools Discovery)**：Client 发送 `tools/list` 请求，Server 返回可用的工具 Schema 列表（名称、描述、JSON Schema 入参）。
 3. **动态绑定**：Client 将 Server 返回的工具列表转换为 LangChain 的 `BaseTool` 或 LLM 原生的 Tool 描述格式并注入给 LLM。
 4. **工具触发与回调**：当 LLM 发起工具调用时，Client 发送 `tools/call` 请求给 Server，Server 执行本地代码后将结果返回给 Client。
+
+---
+> 🏠 **[返回主页 README](../README.md)** \| ◀️ **上一篇：[02. 大模型与Transformer理论题](./02_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%8ETransformer%E7%90%86%E8%AE%BA%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ▶️ **下一篇：[04. LangGraph高级工作流题](./04_LangGraph%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ⚡ **[面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md)**

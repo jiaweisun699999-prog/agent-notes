@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块一：容器化与云原生运维**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/01_云原生与Python高频面试题.md)
+
+---
+
 # Kubernetes
 
 ## 一、K8S简介
@@ -744,3 +749,6 @@ kubectl get -f app.yaml
 # 4. 一键删除 YAML 文件里定义的所有资源（清理极其干净）
 kubectl delete -f app.yaml
 ```
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[01. Docker 总结与实战](./01Docker%E6%80%BB%E7%BB%93.md)** \| ▶️ **下一篇：[03. Python 基础总结](./03Python%E5%9F%BA%E7%A1%80%E6%80%BB%E7%BB%93.md)** \| 🎓 **[进入本模块面试高频题](./interview/01_云原生与Python高频面试题.md)**

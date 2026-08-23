@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 1\. **LangGraph快速入门**
 
 ## 1.1. **LangGraph介绍**
@@ -592,3 +597,6 @@ Tool Calls:
 3) while 循环替代了条件边：在 Graph API 中，循环是通过 conditional\_edges实现的；在 Functional API 中，直接用while True和 break表达。
 4) 工具调用是并行的：“\[execute\_tool(tc) for tc in response.tool\_calls\]” 创建了多个 @task 调用，LangGraph 会并行执行它们。当 LLM 一次发出了多个工具调用时，这些调用会同时执行而不是串行。
 5) Functional API 支持两种调用方式，invoke()同步返回最终结果；stream\_events() 流式返回每次状态更新的快照，适合需要实时展示进度的场景。
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[19. MCP 模型上下文协议](./19MCP%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE.md)** \| ▶️ **下一篇：[21. LangGraph 工作模式](./21LangGraph%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%BF%90%E8%A1%8C.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**

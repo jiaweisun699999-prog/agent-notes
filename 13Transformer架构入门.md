@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块三：人工智能与大模型理论基础**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/02_大模型与Transformer理论面试题.md)
+
+---
+
 # Transformer架构入门
 
 ## 一、整体把握Transformer结构
@@ -1334,3 +1339,5 @@ if __name__ == "__main__":
 3. **架构组装**：通过 `ResNet` 残差连接 + `LayerNorm` + `FFN` 组装成无损传输的 Encoder 与带下三角掩码的 Decoder Block。
 4. **终端概率**：高维向量经 `lm_head` 映射回 `vocab_size` $\rightarrow$ 结合 `Top-p/Top-k` 采样完成自回归文本生成。
 
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[12. 机器学习总结 (二)](./12%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%9F%BA%E7%A1%80%E4%B9%8B%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932.md)** \| ▶️ **下一篇：[14.1 LangChain 介绍](./14.1Langchain%E4%BB%8B%E7%BB%8D.md)** \| 🎓 **[进入本模块面试高频题](./interview/02_大模型与Transformer理论面试题.md)**

@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 5\. **LangGraph 容错（Fault Tolerance）**
 
 ## 5.1. **LangGraph容错机制介绍**
@@ -622,3 +627,6 @@ asyncio.run(main())
        .compile()
    )
    ```
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[23. Store 长期记忆](./23Store%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86.md)** \| ▶️ **下一篇：[25. LangGraph 流式输出](./25LangGraph%E6%B5%81%E7%9B%B8%E5%85%B3.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**

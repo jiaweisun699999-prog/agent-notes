@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 2\. **LangGraph工作模式与运行**
 
 ## 2.1. **构建LangGraph步骤**
@@ -1851,3 +1856,6 @@ asyncio.run(main())
 ```
 
 无论同步还是异步调用，thread\_id 的作用是如果传入 thread\_id（如 [client.runs.stream](http://client.runs.stream)("thread-001", "agent", ...)），服务端会持久化该线程的对话历史，后续调用可以延续之前的上下文；None 表示单次无状态调用。
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[20. LangGraph 快速入门](./20LangGraph%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)** \| ▶️ **下一篇：[22. Checkpointer 短期记忆](./22Checkpointer%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**

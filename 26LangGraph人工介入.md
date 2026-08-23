@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 7\. **LangGraph 人工介入**
 
 ## 7.1. **interrupt介绍及使用方式**
@@ -823,3 +828,6 @@ interrupt() 的载荷和 resume 值要能 JSON 序列化（不同 Checkpointer �
 **5) 避免 while True + interrupt() 循环。**
 
 虽然while True+interrupt使用也没有问题（LangGraph内部给每次中断都进行编号，resume后再次执行while True时，编号相同会获取对应resume值继续执行），但当业务逻辑复杂了很容易出现逻辑混乱，甚至死循环。
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[25. LangGraph 流式输出](./25LangGraph%E6%B5%81%E7%9B%B8%E5%85%B3.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**

@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 4\. **Store长期记忆**
 
 ## 4.1. **什么是Store**
@@ -1206,3 +1211,6 @@ docker start postgres16
 可以看到对话内容中有存入对应的长期记忆，输出内容如下：
 
 ![image.png](./images/23Store长期记忆_2b731dac76b54e44acefbf453a36d8db_1aba7c.jpg)
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[22. Checkpointer 短期记忆](./22Checkpointer%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86.md)** \| ▶️ **下一篇：[24. LangGraph 容错机制](./24LangGraph%E5%AE%B9%E9%94%99.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**

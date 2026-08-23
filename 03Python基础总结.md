@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块二：Python 编程基础与进阶**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/01_云原生与Python高频面试题.md)
+
+---
+
 # Python基础
 
 ## 一、Python介绍
@@ -1158,3 +1163,6 @@ print(id(lst)) # 地址不变
 | tuple 元组 |    有序     |        允许重复        |  不可变  |       数字下标       |
 | dict 字典  | 有序 (3.7+) | key 唯一，value 可重复 |   可变   |      key 键取值      |
 |  set 集合  |    无序     |        自动去重        |   可变   | 无下标，无法单独取值 |
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[02. Kubernetes 总结](./02Kubernetes%E6%80%BB%E7%BB%93.md)** \| ▶️ **下一篇：[05. Python 文件流总结](./05Python%E6%96%87%E4%BB%B6%E6%B5%81%E6%80%BB%E7%BB%93.md)** \| 🎓 **[进入本模块面试高频题](./interview/01_云原生与Python高频面试题.md)**

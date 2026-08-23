@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块五：Agent 核心机制与高级架构**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/03_LangChain与Agent架构面试题.md)
+
+---
+
 # 7 Guardrails安全护栏
 
 ## 7.1. **Guardrails概述**
@@ -1675,3 +1680,6 @@ if __name__ == "__main__":
 ![image.png](./images/17Guardrails安全护栏_9efc0ccb49e845a4abc3cebaa5e67653_00bf6d.jpg)
 
 ![image.png](./images/17Guardrails安全护栏_4f2af068002f4b048d21453081d23d03_66a805.jpg)
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[16. Agent 人机协同](./16%E4%BA%BA%E6%9C%BA%E5%8D%8F%E5%90%8C.md)** \| ▶️ **下一篇：[18. Agent 运行时上下文](./18Agent%E8%BF%90%E8%A1%8C%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87.md)** \| 🎓 **[进入本模块面试高频题](./interview/03_LangChain与Agent架构面试题.md)**

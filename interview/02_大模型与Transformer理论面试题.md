@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](../README.md)** / **面试高频题专区**
+> 🏠 [返回主页 README](../README.md) \| ⚡ [面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md) \| 💻 [白板手写代码](./08_大厂手写代码与白板编程题.md)
+
+---
+
 # 🎓 大模型基础、Transformer 架构与 LLM 硬核理论面试高频题 (全量进阶版)
 
 > 本文档针对大语言模型 (LLM) 研发、AI 算法工程师面试中的核心高频硬核考点，深度剖析 Transformer 架构细节、Self-Attention 数学推导、位置编码及微调量化机制。
@@ -127,3 +132,6 @@
   2. **双量化 (Double Quantization)**：对量化缩放因子（Quantization Scales）再进行一次 8 位量化，每参数额外节省 0.37 个 Bit 的显存。
   3. **分页优化器 (Paged Optimizers)**：利用 CUDA 统一内存，在 Gradient Checkpointing 显存峰值时自动将优化器状态页移入系统 CPU 内存，防止 OOM。
 - **效果**：可以在单卡 24GB 显存（如 3090/4090）上微调 65B/70B 参数规模的超大模型。
+
+---
+> 🏠 **[返回主页 README](../README.md)** \| ◀️ **上一篇：[01. 云原生与Python面试题](./01_%E4%BA%91%E5%8E%9F%E7%94%9F%E4%B8%8EPython%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ▶️ **下一篇：[03. LangChain与Agent架构题](./03_LangChain%E4%B8%8EAgent%E6%9E%B6%E6%9E%84%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ⚡ **[面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md)**

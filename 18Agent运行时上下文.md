@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块五：Agent 核心机制与高级架构**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/03_LangChain与Agent架构面试题.md)
+
+---
+
 # 8\. **Runtime运行时与Agent 上下文**
 
 本章首先介绍LangChain的Runtime运行时系统——它是在Agent内部传递上下文的"管道"和"载体"。理解了Runtime之后，再展开Context Engineering上下文工程的具体实践，涵盖模型上下文、工具上下文、生命周期上下文三大类型，以及它们如何在 Runtime、State、Store 三种数据源上运作。
@@ -865,3 +870,6 @@ agent = create_agent(
 )
 ... ...
 ```
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[17. Guardrails 安全护栏](./17Guardrails%E5%AE%89%E5%85%A8%E6%8A%A4%E6%A0%8F.md)** \| ▶️ **下一篇：[19. MCP 模型上下文协议](./19MCP%E6%A8%A1%E5%9E%8B%E4%B8%8A%E4%B8%8B%E6%96%87%E5%8D%8F%E8%AE%AE.md)** \| 🎓 **[进入本模块面试高频题](./interview/03_LangChain与Agent架构面试题.md)**

@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块五：Agent 核心机制与高级架构**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/03_LangChain与Agent架构面试题.md)
+
+---
+
 # 9\. **Model Context Protocol (MCP)模型上下文协议**
 
 ## 9.1. **MCP介绍**
@@ -2851,3 +2856,6 @@ ORD-002、ORD-004 由于产品质量问题，请退款
 ```
 
 以上对话过程中可以看到Client端每次对话都有审计日志输出，且Server端对应的日志也会输出到Client端。
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[18. Agent 运行时上下文](./18Agent%E8%BF%90%E8%A1%8C%E6%97%B6%E4%B8%8A%E4%B8%8B%E6%96%87.md)** \| ▶️ **下一篇：[20. LangGraph 快速入门](./20LangGraph%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8.md)** \| 🎓 **[进入本模块面试高频题](./interview/03_LangChain与Agent架构面试题.md)**

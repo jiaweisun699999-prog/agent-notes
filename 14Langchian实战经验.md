@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块四：LangChain 框架与应用开发**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/03_LangChain与Agent架构面试题.md)
+
+---
+
 # LangChian实战经验
 
 ## 一、 LangChain 介绍与环境快速上手
@@ -2393,3 +2398,5 @@ def long_running_task(task_name: str) -> str:
 | **`checkpoints`**          | 状态快照与 ID        | 状态持久化节点级     | 状态恢复、人机审核 (Human-in-the-loop) 场景          |
 | **`custom`**               | 开发者自定义字典     | 运行时手动触发       | 工具内部汇报**自定义进度条（如 `%`）与过程日志**     |
 
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[14.3 Agent 智能体](./14.3Agent%E6%99%BA%E8%83%BD%E4%BD%93.md)** \| ▶️ **下一篇：[15. Agent 长短期记忆](./15%E9%95%BF%E7%9F%AD%E6%9C%9F%E8%AE%B0%E5%BF%86.md)** \| 🎓 **[进入本模块面试高频题](./interview/03_LangChain与Agent架构面试题.md)**

@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 3\. **Checkpointer短期记忆**
 
 ## 3.1. **Checkpointer介绍**
@@ -1807,3 +1812,6 @@ App更新后一直闪退，怎么解决？
 ```
 
 重启client后，再次对话，只要thread\_id相同，之前保存的状态也可以看到。
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[21. LangGraph 工作模式](./21LangGraph%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F%E4%B8%8E%E8%BF%90%E8%A1%8C.md)** \| ▶️ **下一篇：[23. Store 长期记忆](./23Store%E9%95%BF%E6%9C%9F%E8%AE%B0%E5%BF%86.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**

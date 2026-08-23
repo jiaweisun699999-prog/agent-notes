@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **模块六：LangGraph 复杂 Workflow 与图状态网络**
+> 🏠 [返回主页 README](./README.md) \| ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) \| 🎓 [本模块面试题](./interview/04_LangGraph高级工作流面试题.md)
+
+---
+
 # 6\. **LangGraph 流相关**
 
 ## 6.1. **LangGraph流式输出模式**
@@ -725,3 +730,6 @@ if __name__ == "__main__":
 ![image.png](./images/25LangGraph流相关_4074343bccb14833840817df1c4729a5_ea68a4.jpg)
 
 代码注意：interleave 返回 (投影名, 数据) 二元组，name 是投影名（"values" / "messages"），item 是对应投影的数据。
+
+---
+> 🏠 **[返回主页 README](./README.md)** \| ◀️ **上一篇：[24. LangGraph 容错机制](./24LangGraph%E5%AE%B9%E9%94%99.md)** \| ▶️ **下一篇：[26. LangGraph 人工介入](./26LangGraph%E4%BA%BA%E5%B7%A5%E4%BB%8B%E5%85%A5.md)** \| 🎓 **[进入本模块面试高频题](./interview/04_LangGraph高级工作流面试题.md)**
