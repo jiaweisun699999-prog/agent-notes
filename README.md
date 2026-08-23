@@ -120,13 +120,16 @@ graph TD
 
 | 序号 | 专题面试名称 | 覆盖核心面试考点 | 快速跳转 |
 | :---: | :--- | :--- | :---: |
+| 00 | **面试前 30 分钟超级速记卡片** | 核心计算公式 (Attention, LoRA, KV Cache, RRF)、关键技术对比表、15 秒手写代码骨架与黑话 Checklist | [📄 阅读文档](./interview/00_面试冲刺30分钟速记卡片.md) |
 | 01 | **云原生容器化与 Python 高频面试题** | Namespace/cgroups 隔离、Overlay2 联合挂载、K8s 架构与 Service 负载均衡、`__new__`/`__init__` 区别、GC 分代回收与 GIL 锁解决 | [📄 阅读文档](./interview/01_云原生与Python高频面试题.md) |
-| 02 | **大模型基础与 Transformer 理论面试题** | Self-Attention 点积放缩推导、MHA/MQA/GQA 演进、RoPE 旋转位置编码、Pre-LN 优势、LoRA 低秩微调与 INT4/INT8 量化原理 | [📄 阅读文档](./interview/02_大模型与Transformer理论面试题.md) |
-| 03 | **LangChain 与 Agent 架构面试题** | LCEL 管道符原理、ReAct 智能体 Loop 流程、长短记忆协同与 Token 截断、Guardrails 安全护栏、Anthropic MCP 协议三层架构 | [📄 阅读文档](./interview/03_LangChain与Agent架构面试题.md) |
-| 04 | **LangGraph 状态机与工作流面试题** | StateGraph vs AgentExecutor 优势、Pregel 引擎 Superstep 机制、Checkpointer 与 Store 区别、Time-Travel 时间旅行、`interrupt()` 人工介入 | [📄 阅读文档](./interview/04_LangGraph高级工作流面试题.md) |
-| 05 | **RAG 检索增强生成与向量检索面试题** | 递归/语义切块、BM25+Dense 双路混合检索、RRF 融合与 Cross-Encoder Rerank、HyDE 假设性嵌入、HNSW 与 IVFFlat 向量索引 | [📄 阅读文档](./interview/05_RAG检索增强生成与向量检索面试题.md) |
-| 06 | **大模型推理加速、性能调优与评估监控面试题** | vLLM/PagedAttention 显存优化、Continuous Batching、TTFT 与 TPOT 延迟调优、Token 成本控制、LangSmith 与 Ragas 评估 | [📄 阅读文档](./interview/06_大模型推理加速、性能调优与评估监控面试题.md) |
-| 07 | **Agent 项目实战与高频场景问答 (STAR法则)** | 16K-22K STAR 法则项目介绍模版、Agent 死循环与工具幻觉应对、JSON 格式化容错、生产环境可观测性与架构优化 | [📄 阅读文档](./interview/07_Agent项目实战与高频场景问答(STAR法则).md) |
+| 02 | **大模型基础与 Transformer 理论面试题** | Self-Attention 点积放缩推导、FlashAttention、MHA/GQA 演进、RoPE 旋转位置编码、Pre-LN 优势、LoRA 与 QLoRA 微调、INT4/INT8 量化 | [📄 阅读文档](./interview/02_大模型与Transformer理论面试题.md) |
+| 03 | **LangChain 与 Agent 架构面试题** | LCEL 管道符原理、ReAct 智能体 Loop 流程、Agentic RAG、长短记忆协同与 Token 截断、Guardrails 安全护栏、Anthropic MCP 协议 | [📄 阅读文档](./interview/03_LangChain与Agent架构面试题.md) |
+| 04 | **LangGraph 状态机与工作流面试题** | StateGraph 优势、Pregel 引擎 Superstep 机制、Checkpointer 与 Store 区别、多 Agent 3 大模式、Time-Travel 时间旅行、`interrupt()` | [📄 阅读文档](./interview/04_LangGraph高级工作流面试题.md) |
+| 05 | **RAG 检索增强生成与向量检索面试题** | 递归/语义切块、BM25+Dense 双路混合检索、RRF 融合与 Cross-Encoder Rerank、HyDE 假设性嵌入、单阶段预过滤、HNSW 索引 | [📄 阅读文档](./interview/05_RAG检索增强生成与向量检索面试题.md) |
+| 06 | **大模型推理加速、性能调优与评估监控面试题** | vLLM/PagedAttention 显存物理页映射、Continuous Batching、张量并行 (TP)、推测解码、TTFT/TPOT 调优、LangSmith 评估 | [📄 阅读文档](./interview/06_大模型推理加速、性能调优与评估监控面试题.md) |
+| 07 | **Agent 项目实战与高频场景问答 (STAR法则)** | 16K-22K STAR 法则项目介绍模版、Agent 死循环与工具幻觉应对、模型故障降级路由、写操作 Saga 事务回滚、可观测性优化 | [📄 阅读文档](./interview/07_Agent项目实战与高频场景问答(STAR法则).md) |
+| 08 | **大厂手写代码与白板编程题 (Live Coding)** | 手写 Self-Attention (含 Mask & Scaling)、手写 LoRA Linear 封装层、手写 BM25+Dense RRF 融合算法、手写 ReAct Agent Loop 引擎 | [📄 阅读文档](./interview/08_大厂手写代码与白板编程题.md) |
+| 09 | **面试反问与高情商沟通技巧 (16K-22K 指南)** | 尾声高级反问话术 (探寻技术瓶颈/架构)、16K-22K 薪资谈判与期望表达、高情商回答“最大的技术缺点/失败案例” | [📄 阅读文档](./interview/09_面试反问与高情商沟通技巧.md) |
 
 ---
 
