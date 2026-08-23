@@ -109,4 +109,23 @@
 - **`custom` 模式**：允许在节点内部通过 `StreamWriter` 自定义向前端推送任意的实时进度事件（如 `writer({"status": "正在检索数据库..."})`）。
 
 ---
+
+### Q9: LangGraph 开发中核心 API 函数与方法清单（Node/Edge/State/Interrupt）及其场景考点？
+**标准回答**：
+
+1. **图构建与路由 API**：
+   - **`builder.add_node(name, func)`**：添加图节点，入参函数接收全局 `State` 并返回更新字段字典。
+   - **`builder.add_edge(start_node, end_node)`**：静态无条件边。
+   - **`builder.add_conditional_edges(source, routing_func, path_map)`**：**核心动态路由 API**。`routing_func` 根据当前 State 计算返回目标 Node 名称字符串，由 `path_map` 映射到后续节点。
+
+2. **中断与人工介入 API**：
+   - **`interrupt(data_to_user)`**：在节点代码内部挂起图的执行，将数据返回给调用方并保存快照。
+   - **`Command(resume=data_from_user)`**：前端或人工恢复执行时传入参数，解除 `interrupt()` 挂起状态。
+
+3. **状态修改与快照回滚 API**：
+   - **`app.update_state(config, values)`**：动态改写持久化 Checkpoint 中的 State 字段（用于手动修正中间结果）。
+   - **`app.get_state(config)`**：读取当前线程的最新 State 快照及其 `checkpoint_id`。
+   - **`app.get_state_history(config)`**：获取所有历史 Superstep 的快照生成树，用于**时间旅行 (Time-travel)** 分支调试。
+
+---
 > 🏠 **[返回主页 README](../README.md)** \| ◀️ **上一篇：[03. LangChain与Agent架构题](./03_LangChain%E4%B8%8EAgent%E6%9E%B6%E6%9E%84%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ▶️ **下一篇：[05. RAG与向量检索题](./05_RAG%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90%E4%B8%8E%E5%90%91%E9%87%8F%E6%A3%80%E7%B4%A2%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ⚡ **[面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md)**

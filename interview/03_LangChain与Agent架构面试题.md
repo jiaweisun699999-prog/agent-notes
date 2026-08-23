@@ -120,4 +120,47 @@
 4. **工具触发与回调**：当 LLM 发起工具调用时，Client 发送 `tools/call` 请求给 Server，Server 执行本地代码后将结果返回给 Client。
 
 ---
+
+### Q10: 大模型如何实现 100% 可靠的结构化输出 (Structured Output)？详细对比 4 种实现方案及原理。
+**标准回答**：
+大模型结构化输出（如按固定 Pydantic / JSON Schema 提取数据）是企业级 Agent 与数据抽取的必考项。目前主要有以下 **4 种主流方案**：
+
+1. **方案一：Prompt 提示词 + OutputParser 文本解析 (传统方案)**
+   - **原理**：在 Prompt 中拼接 JSON Schema 模板（如 `format_instructions`），让 LLM 生成纯文本，通过 `PydanticOutputParser` 正则解析。格式非法时通过 `OutputFixingParser` 发起二次重试 (Re-ask)。
+   - **优缺点**：无模型限制；但**极易崩塌**，重试 Token 成本高。
+
+2. **方案二：LLM 原生 Function Calling / Tool Calling 绑定**
+   - **原理**：将数据结构包装为 Dummy Tool 的入参 Schema，利用 `model.bind_tools([schema])` 或 LangChain 的 `model.with_structured_output(Schema)`，强制 LLM 生成 `tool_calls`。
+   - **优缺点**：准确率大幅提升；但在开源小模型上仍有少量解析错误风险。
+
+3. **方案三：OpenAI 原生 Structured Outputs API (`json_schema` 严格模式)**
+   - **原理**：OpenAI 官方推出的 `response_format={"type": "json_schema", "strict": True}`。在模型推理解码阶段强制校验 Schema。
+   - **优缺点**：**100% 保证遵循 Schema**；但仅限特定闭源 API 支持。
+
+4. **方案四：采样层语法引导 / Logit 掩码 (Logit Bias / BNF Mask Decoding，如 Outlines / vLLM XGrammar)**
+   - **原理**：在 GPU 推理引擎生成每个 Token 的采样步（Sampling Step）中，根据 JSON Schema 的文法规则（BNF Grammar），**动态将非法 Token 的 Logits 概率遮罩为 $-\infty$**。
+   - **优缺点**：**零重试、100% 语法绝对正确**，推理速度最快，是本地开源部署（vLLM / Instructor）的最佳方案。
+
+---
+
+### Q11: LangChain & Agent 开发中核心函数与 API 方法有哪些？企业面试如何针对这些 API 进行场景考核？
+**标准回答**：
+企业面试**绝不会死记硬背拼写**，而是结合**真实场景**考察你对核心 API 函数的使用熟练度与底层机制：
+
+1. **工具绑定与结构化输出 API**：
+   - **`@tool` 装饰器**：用于快速将 Python 函数定义为 Agent 工具。入参需搭配 `args_schema` 指定 Pydantic 类。
+   - **`model.bind_tools([tool1, tool2])`**：将工具列表转为 OpenAI/Qwen 原生的 Function Calling API 参数并绑定给 Model。
+   - **`model.with_structured_output(Schema)`**：高阶封装 API，直接让模型输出指定的 Pydantic 实例对象。
+   - **面试常考题**：“如果 `@tool` 内部函数执行抛出 Exception，你怎么防止 Agent 崩溃？”（答：使用 `return_direct=False` 并捕获 Exception 返回包含错误原因的字符串，让 LLM 自动纠错）。
+
+2. **流式传输与事件监听 API**：
+   - **`chain.stream(input)`**：标准流式迭代器，适合纯文本逐字打字机效果。
+   - **`chain.astream_events(input, version="v2")`**：**高阶异步流事件监听 API**。
+   - **面试常考题**：“在 Web 端如何区分当前流出来的是 LLM 的回答还是 Tool 的执行日志？”（答：监听 `astream_events` 抛出的事件类型，如 `on_chat_model_stream` 代表 LLM Token 流，`on_tool_start` / `on_tool_end` 代表工具调用进度）。
+
+3. **路由分发与分流 API**：
+   - **`RunnableBranch( (condition, runnable1), default_runnable )`**：根据条件动态将请求路由给不同的 Chain/Model。
+   - **`RunnableParallel(a=runnable1, b=runnable2)`**：并行并发执行多个子组件，并将输出合并。
+
+---
 > 🏠 **[返回主页 README](../README.md)** \| ◀️ **上一篇：[02. 大模型与Transformer理论题](./02_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E4%B8%8ETransformer%E7%90%86%E8%AE%BA%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ▶️ **下一篇：[04. LangGraph高级工作流题](./04_LangGraph%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ⚡ **[面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md)**

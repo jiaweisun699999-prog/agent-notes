@@ -130,6 +130,7 @@ graph TD
 | 07 | **Agent 项目实战与高频场景问答 (STAR法则)** | 16K-22K STAR 法则项目介绍模版、Agent 死循环与工具幻觉应对、模型故障降级路由、写操作 Saga 事务回滚、可观测性优化 | [📄 阅读文档](./interview/07_Agent项目实战与高频场景问答(STAR法则).md) |
 | 08 | **大厂手写代码与白板编程题 (Live Coding)** | 手写 Self-Attention (含 Mask & Scaling)、手写 LoRA Linear 封装层、手写 BM25+Dense RRF 融合算法、手写 ReAct Agent Loop 引擎 | [📄 阅读文档](./interview/08_大厂手写代码与白板编程题.md) |
 | 09 | **面试反问与高情商沟通技巧 (16K-22K 指南)** | 尾声高级反问话术 (探寻技术瓶颈/架构)、16K-22K 薪资谈判与期望表达、高情商回答“最大的技术缺点/失败案例” | [📄 阅读文档](./interview/09_面试反问与高情商沟通技巧.md) |
+| 10 | **LangChain 与 LangGraph 全量 API 函数与方法速查手册** | 全量 API 函数汇总 (`bind_tools`, `with_structured_output`, `@tool`, `astream_events`, `StateGraph`, `interrupt`, `Command`, `update_state`, `get_state_history`, `as_retriever`) | [📄 阅读文档](./interview/10_LangChain与LangGraph全量API函数与方法速查手册.md) |
 
 ---
 

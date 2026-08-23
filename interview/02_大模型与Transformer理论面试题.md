@@ -9,6 +9,34 @@
 
 ---
 
+### 🎨 Transformer & Self-Attention 核心数据流示意图
+
+```mermaid
+graph TD
+    subgraph Self_Attention ["Self-Attention 缩放点积注意力数据流 (Scaled Dot-Product Attention)"]
+        Q["Query (Q) 向量"]
+        K["Key (K) 向量"]
+        V["Value (V) 向量"]
+        QK["1. 点积计算: Q × Kᵀ"] 
+        Scale["2. 维度缩放: ÷ √d_k"]
+        Mask["3. 掩码操作 (Causal / Padding Mask)"]
+        Softmax["4. 概率归一化: Softmax()"]
+        MatMulV["5. 聚合特征: Attn_Weights × V"]
+        Output["最终上下文特征向量 (Context Output)"]
+
+        Q --> QK
+        K --> QK
+        QK --> Scale
+        Scale --> Mask
+        Mask --> Softmax
+        Softmax --> MatMulV
+        V --> MatMulV
+        MatMulV --> Output
+    end
+```
+
+---
+
 ## 一、 Transformer 架构与 Self-Attention 数学原理
 
 ### Q1: Self-Attention 注意力机制的公式是什么？为什么计算点积后要除以 $\sqrt{d_k}$？
