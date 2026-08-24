@@ -17,6 +17,21 @@
 
 ---
 
+### Q2.1: Q、K、V 矩阵是如何计算出来的？自注意力的完整计算数据流是什么？
+**标准回答 (16K-22K 满分表达)**：
+1. **输入表达与线性投影**：
+   - 假设输入文本序列由 $N$ 个 Token 组成，经 Word Embedding 与位置编码合并后得到矩阵 $X \in \mathbb{R}^{N \times d_{model}}$。
+   - 定义 3 个独立的可学习权重矩阵 $W^Q \in \mathbb{R}^{d_{model} \times d_k}, W^K \in \mathbb{R}^{d_{model} \times d_k}, W^V \in \mathbb{R}^{d_{model} \times d_v}$。
+   - 通过矩阵相乘生成 Query, Key, Value 矩阵：
+     $$Q = X W^Q, \quad K = X W^K, \quad V = X W^V$$
+2. **完整数据流 5 步步阶**：
+   - **Step 1 (投影)**：$X \rightarrow Q, K, V$
+   - **Step 2 (相似度点积)**：计算 $S = Q K^T \in \mathbb{R}^{N \times N}$，代表任意两 Token 间的相关得分。
+   - **Step 3 (缩放)**：$S_{scaled} = \frac{S}{\sqrt{d_k}}$。
+   - **Step 4 (Softmax 归一化)**：$A = \text{softmax}(S_{scaled}) \in \mathbb{R}^{N \times N}$，得到注意力概率权重矩阵。
+   - **Step 5 (加权特征输出)**：$O = A V \in \mathbb{R}^{N \times d_v}$。
+
+
 ### Q2: 详细介绍自注意力机制 (Self-Attention) 的计算公式与数学原理。
 **标准回答 (16K-22K 满分表达)**：
 - **核心公式**：
@@ -75,6 +90,38 @@
 - **LSTM / GRU 改进**：
   - **LSTM (长短期记忆网络)**：引入细胞状态 $C_t$ 和三大门控（**遗忘门**决定丢弃历史、**输入门**决定写入新值、**输出门**决定输出），构建加性梯度通路，彻底解决梯度消失。
   - **GRU (门控循环单元)**：精简为**更新门 (Update Gate)** 与 **重置门 (Reset Gate)**，性能接近 LSTM 但参数更少、计算更快。
+
+---
+
+### Q7: 什么是 CNN 中的卷积 (Convolution) 与池化 (Pooling)？它们的核心特性与作用是什么？
+**标准回答 (16K-22K 满分表达)**：
+- **卷积 (Convolution)**：
+  - 原理：滑动卷积核（Kernel/Filter）在局部感受野（Receptive Field）上与输入特征相乘求和加偏置。
+  - 两大核心特性：
+    1. **局部连接 (Local Connectivity)**：每个神经元仅与输入的局部空间区域相连，提取局部图像/文本边缘与语义特征。
+    2. **权值共享 (Weight Sharing)**：同一个卷积核在整个输入特征图上共享参数，极大降低模型参数量与过拟合风险。
+- **池化 (Pooling)**：
+  - 原理：降低特征图空间分辨率的下采样 (Sub-sampling) 操作。
+  - 分类：**最大池化 (Max Pooling)** 提取区域最显著特征；**平均池化 (Average Pooling)** 保留平滑背景信息。
+  - 核心作用：**降维减少计算量**、提供**平移不变性 (Translation Invariance)**，增强模型鲁棒性。
+
+
+---
+
+### Q8: 什么是神经网络的正向传播 (Forward Propagation) 与反向传播 (Backpropagation / BP)？
+**标准回答 (16K-22K 满分表达)**：
+1. **正向传播 (Forward Propagation / 前向传播)**：
+   - **定义**：输入数据从网络输入层出发，经过各个隐藏层的线性变换（矩阵乘法 $W \cdot x + b$）与非线性激活函数（如 ReLU、GeLU、Softmax）逐层向前递推，最终在输出层计算出预测值 $\hat{y}$，并与真实标签 $y$ 计算得到损失函数值 $\mathcal{L}$ (Loss)。
+   - **核心职责**：评估模型在当前参数下的预测表现，并计算标量 Loss。
+2. **反向传播 (Backpropagation / BP 算法)**：
+   - **原理**：基于微积分中的**链式法则 (Chain Rule)**，从输出层的损失函数 $\mathcal{L}$ 出发，沿网络相反方向（从后往前）逐层求导，计算出 Loss 对每一个可学习参数（权重 $W$ 与偏置 $b$）的**梯度 (Gradients $\frac{\partial \mathcal{L}}{\partial W}$)**。
+   - **参数更新**：计算得到的梯度交由优化器（如 SGD、AdamW）按照学习率 $\eta$ 沿梯度的反方向更新权重：
+     $$W_{new} = W_{old} - \eta \cdot \frac{\partial \mathcal{L}}{\partial W}$$
+   - **核心职责**：将预测误差逆向传导，求解各个参数的梯度以指导模型自我学习迭代。
+3. 💡 **16K-22K 大模型生产加分项 (激活重算 Activation Checkpointing)**：
+   - 在反向传播计算梯度时，必须依赖正向传播时暂存在显存里的**中间激活值 (Activations)**。
+   - 在超大模型训练时，激活值显存占用甚至超过模型权重本身。生产中普遍采用 **Activation Checkpointing (重算机制)**：正向传播时不保存全部激活值，反向传播时按需重新计算，用少量计算时间换取巨大的显存节省。
+
 
 ---
 
@@ -141,6 +188,21 @@
 4. **`model.astream(input)`**：异步流式生成打字机响应。
 5. **`model.batch([input1, input2])`**：批量并发调用，底层自动做并发加速。
 6. **`model.bind_tools(tools=[...])`**：工具绑定调用，将自定义工具转化为 API 要求的 JSON Schema 并绑定到模型。
+---
+
+### Q6.1: 详解 LangChain `invoke()` 方法支持的三种入参数据传递类型及底层转换机制。
+**标准回答 (16K-22K 满分表达)**：
+LangChain 组件（`Runnable`）的 `invoke(input)` 方法支持以下三种主流数据传递类型：
+1. **String (纯字符串类型)**：
+   - 用法：`chain.invoke("什么是 Agent？")`
+   - 底层机制：最简调用方式。框架内部会自动将其包装转换为单个 `HumanMessage(content="什么是 Agent？")` 传给底层模型。
+2. **Dict (字典类型)**：
+   - 用法：`chain.invoke({"input": "什么是 Agent？", "chat_history": [...]})`
+   - 底层机制：多变量与模组渲染方式。当 Chain/Prompt 中包含多个动态变量（如 Prompt 模板中声明了 `{input}` 和 `{chat_history}`）时，必须以 Dict 形式传参，由 `ChatPromptTemplate` 格式化渲染。
+3. **List[BaseMessage] (消息对象列表类型)**：
+   - 用法：`chain.invoke([SystemMessage("人设提示"), HumanMessage("用户提问")])`
+   - 底层机制：原生多轮对话透传方式。跳过 Prompt 模组解析，直接将完整消息历史列表传递给底层 `ChatModel`，常用于多轮对话历史维护与 Agent 状态恢复。
+
 
 ---
 
@@ -163,10 +225,10 @@
   ```python
   from pydantic import BaseModel, Field
   from langchain_core.tools import tool
-
+  
   class SearchInput(BaseModel):
       query: str = Field(description="搜索关键词")
-
+  
   @tool("google_search", args_schema=SearchInput, return_direct=False)
   def google_search(query: str) -> str:
       # 用于在 Google 上搜索最新新闻与信息的工具
@@ -181,8 +243,8 @@
 - **定义**：Agent 是以大语言模型为“大脑”的自主决策系统。
 - **本质区别**：
   - **Chain (链式)**：硬编码的固定执行路径（A $
-\rightarrow$ B $
-\rightarrow$ C），无法根据中间结果动态调整步骤。
+  \rightarrow$ B $
+  \rightarrow$ C），无法根据中间结果动态调整步骤。
   - **Agent (智能体)**：依据 **ReAct (Reasoning + Acting)** 循环，由 LLM 动态决定下一步是调用工具、结束任务还是向用户追问，具备自主思考、任务拆解与动态路由能力。
 
 ---
@@ -192,8 +254,7 @@
 
 | 维度 | 单纯 LLM | LLM + Tool | Agent 智能体 |
 | :--- | :--- | :--- | :--- |
-| **交互模式** | 纯文本输入 $
-\rightarrow$ 纯文本输出 | 单次工具调用（硬编码调用） | 多轮 Reasoning-Action 动态循环 |
+| **交互模式** | 纯文本输入 、纯文本输出 |单次工具调用（硬编码调用）|多轮 Reasoning-Action 动态循环|
 | **外部能力** | 仅依赖训练静态知识 | 可被动获取外部 API 数据 | 自主决定何时调用何种工具 |
 | **任务规划** | 无规划能力 | 无规划能力 | 具备子任务拆解、状态追踪与自愈能力 |
 
@@ -439,6 +500,17 @@
 ---
 
 ## 七、Runtime 运行时上下文面试题
+
+
+### Q0: 什么是 Agent 的 Runtime (运行时)？它的核心概念、职责与实现原理是什么？
+**标准回答 (16K-22K 满分表达)**：
+- **核心定义**：Runtime (运行时) 是 Agent 应用在执行过程中的**宿主环境与容器引擎**。它为上层的智能体逻辑提供底层资源调度、状态维护、生命周期管理与上下文隔离。
+- **三大核心职责**：
+  1. **上下文管理 (Context Management)**：隔离不同用户/会话的配置、全局变量与环境变量。
+  2. **状态与记忆持久化 (State & Storage)**：向节点暴露 `State` 改写句柄与长期记忆 `Store` 读写接口。
+  3. **数据流与事件分发 (Streaming & Event Dispatch)**：提供统一的 `streamWriter` 句柄，支持向前端实时推送 Token、任务事件或自定义 Trace 日志。
+- **实现原理**：在 LangGraph / LangChain 中，Runtime 采用依赖注入 (Dependency Injection) 模式，在图启动时创建容器，将 `config`、`store` 和底层线程句柄自动注入到各个 Node 函数和 Tool 执行体中。
+
 
 ### Q1: Runtime 运行时承载哪些核心信息？
 **标准回答 (16K-22K 满分表达)**：

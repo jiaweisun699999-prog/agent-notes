@@ -64,10 +64,25 @@
 4. **`model.astream(input)`**：异步流式生成打字机响应。
 5. **`model.batch([input1, input2])`**：批量并发调用，底层自动做并发加速。
 6. **`model.bind_tools(tools=[...])`**：工具绑定调用，将自定义工具转化为 API 要求的 JSON Schema 并绑定到模型。
+---
+
+### Q6.1: 详解 LangChain `invoke()` 方法支持的三种入参数据传递类型及底层转换机制。
+**标准回答 (16K-22K 满分表达)**：
+LangChain 组件（`Runnable`）的 `invoke(input)` 方法支持以下三种主流数据传递类型：
+1. **String (纯字符串类型)**：
+   - 用法：`chain.invoke("什么是 Agent？")`
+   - 底层机制：最简调用方式。框架内部会自动将其包装转换为单个 `HumanMessage(content="什么是 Agent？")` 传给底层模型。
+2. **Dict (字典类型)**：
+   - 用法：`chain.invoke({"input": "什么是 Agent？", "chat_history": [...]})`
+   - 底层机制：多变量与模组渲染方式。当 Chain/Prompt 中包含多个动态变量（如 Prompt 模板中声明了 `{input}` 和 `{chat_history}`）时，必须以 Dict 形式传参，由 `ChatPromptTemplate` 格式化渲染。
+3. **List[BaseMessage] (消息对象列表类型)**：
+   - 用法：`chain.invoke([SystemMessage("人设提示"), HumanMessage("用户提问")])`
+   - 底层机制：原生多轮对话透传方式。跳过 Prompt 模组解析，直接将完整消息历史列表传递给底层 `ChatModel`，常用于多轮对话历史维护与 Agent 状态恢复。
+
 
 ---
 
-### Q7 & Q8: 结构化输出的三种实现方式是什么？如何获取及各自的优缺点？
+### Q7 & Q8: LLM结构化输出的三种实现方式是什么？如何获取及各自的优缺点？
 **标准回答 (16K-22K 满分表达)**：
 1. **提示词约束 + OutputParser (Legacy/传统方案)**：
    - 机制：用 `PydanticOutputParser` 生成格式说明注入 Prompt，最后用 `parser.parse()` 提取。
@@ -86,10 +101,10 @@
   ```python
   from pydantic import BaseModel, Field
   from langchain_core.tools import tool
-
+  
   class SearchInput(BaseModel):
       query: str = Field(description="搜索关键词")
-
+  
   @tool("google_search", args_schema=SearchInput, return_direct=False)
   def google_search(query: str) -> str:
       # 用于在 Google 上搜索最新新闻与信息的工具
@@ -104,8 +119,8 @@
 - **定义**：Agent 是以大语言模型为“大脑”的自主决策系统。
 - **本质区别**：
   - **Chain (链式)**：硬编码的固定执行路径（A $
-\rightarrow$ B $
-\rightarrow$ C），无法根据中间结果动态调整步骤。
+  \rightarrow$ B $
+  \rightarrow$ C），无法根据中间结果动态调整步骤。
   - **Agent (智能体)**：依据 **ReAct (Reasoning + Acting)** 循环，由 LLM 动态决定下一步是调用工具、结束任务还是向用户追问，具备自主思考、任务拆解与动态路由能力。
 
 ---
@@ -115,8 +130,7 @@
 
 | 维度 | 单纯 LLM | LLM + Tool | Agent 智能体 |
 | :--- | :--- | :--- | :--- |
-| **交互模式** | 纯文本输入 $
-\rightarrow$ 纯文本输出 | 单次工具调用（硬编码调用） | 多轮 Reasoning-Action 动态循环 |
+| **交互模式** | 纯文本输入 、纯文本输出 |单次工具调用（硬编码调用）|多轮 Reasoning-Action 动态循环|
 | **外部能力** | 仅依赖训练静态知识 | 可被动获取外部 API 数据 | 自主决定何时调用何种工具 |
 | **任务规划** | 无规划能力 | 无规划能力 | 具备子任务拆解、状态追踪与自愈能力 |
 

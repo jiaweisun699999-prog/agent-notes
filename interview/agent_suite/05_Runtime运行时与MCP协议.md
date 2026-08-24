@@ -7,6 +7,17 @@
 
 ## 七、Runtime 运行时上下文面试题
 
+
+### Q0: 什么是 Agent 的 Runtime (运行时)？它的核心概念、职责与实现原理是什么？
+**标准回答 (16K-22K 满分表达)**：
+- **核心定义**：Runtime (运行时) 是 Agent 应用在执行过程中的**宿主环境与容器引擎**。它为上层的智能体逻辑提供底层资源调度、状态维护、生命周期管理与上下文隔离。
+- **三大核心职责**：
+  1. **上下文管理 (Context Management)**：隔离不同用户/会话的配置、全局变量与环境变量。
+  2. **状态与记忆持久化 (State & Storage)**：向节点暴露 `State` 改写句柄与长期记忆 `Store` 读写接口。
+  3. **数据流与事件分发 (Streaming & Event Dispatch)**：提供统一的 `streamWriter` 句柄，支持向前端实时推送 Token、任务事件或自定义 Trace 日志。
+- **实现原理**：在 LangGraph / LangChain 中，Runtime 采用依赖注入 (Dependency Injection) 模式，在图启动时创建容器，将 `config`、`store` 和底层线程句柄自动注入到各个 Node 函数和 Tool 执行体中。
+
+
 ### Q1: Runtime 运行时承载哪些核心信息？
 **标准回答 (16K-22K 满分表达)**：
 - **定义**：Runtime 是 Agent 运行期间的容器环境。
