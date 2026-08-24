@@ -37,6 +37,77 @@ graph TD
 
 ---
 
+---
+
+## 零、 深度学习基础：RNN、CNN 卷积池化与核心概念演进
+
+### Q0.1: 什么是 RNN (循环神经网络)？它的核心原理、致命缺陷及 LSTM/GRU 改进是什么？
+**标准回答**：
+- **核心原理**：RNN 专为处理序列数据（如文本、时间序列）设计。按时间步（Time Step）顺序递推，内部维护隐状态（Hidden State）$h_t$ 记录历史信息：
+  $$h_t = \tanh(W_{hh} h_{t-1} + W_{xh} x_t + b)$$
+- **致命缺陷**：
+  1. **无法并行计算**：时刻 $t$ 的计算强依赖时刻 $t-1$ 的输出，GPU 无法并行化，训练极其缓慢。
+  2. **梯度消失与梯度爆炸 (Vanishing/Exploding Gradient)**：沿时间轴反向传播 BPTT 时，雅可比矩阵长连乘导致远距离梯度呈指数级衰减为 0 或飙升为 $\infty$，无法捕捉长距离依赖关系。
+- **LSTM / GRU 改进**：
+  - **LSTM (长短期记忆网络)**：引入遗忘门 (Forget Gate)、输入门 (Input Gate)、输出门 (Output Gate) 和细胞状态 (Cell State $C_t$)，构建加性梯度高速公路，解决梯度消失。
+  - **GRU (门控循环单元)**：精简版 LSTM，融合成更新门 (Update Gate) 与重置门 (Reset Gate)，参数更少、训练更快。
+
+---
+
+### Q0.2: 什么是卷积 (Convolution) 与池化 (Pooling)？它们的核心特性和作用是什么？
+**标准回答**：
+- **卷积 (Convolution)**：
+  - 原理：滑动卷积核（Kernel/Filter）在局部感受野（Receptive Field）上与输入特征做点积求和加偏置。
+  - 两大核心特性：
+    1. **局部连接 (Local Connectivity)**：每个神经元只与输入的局部区域相连，提取局部空间/结构特征。
+    2. **权值共享 (Weight Sharing)**：同一个卷积核在整个输入特征图上共享参数，极大降低模型参数量。
+- **池化 (Pooling)**：
+  - 原理：降低特征图空间分辨率的下采样（Sub-sampling）操作。
+  - 分类：**最大池化 (Max Pooling)** 提取最显著局部特征；**平均池化 (Average Pooling)** 保留整体背景特征。
+  - 作用：降维减少计算量、提供**平移不变性 (Translation Invariance)**，并起到防过拟合作用。
+
+---
+
+### Q0.3: 什么是注意力机制 (Attention Mechanism)？它相比传统 Seq2Seq 瓶颈有何突破？
+**标准回答**：
+- **概念**：模仿人类视觉焦点选择，计算 Query ($Q$) 与 Key ($K$) 矩阵的相关性相似度得分，转化为 Softmax 概率权重对 Value ($V$) 进行加权聚合。
+- **对比传统 Seq2Seq 的突破**：
+  - 传统 RNN/Seq2Seq 模型必须把任意长度的输入序列强行压缩为一个**固定长度的向量 $C$**，导致长文本信息丢失（产生严重的**信息瓶颈 Information Bottleneck**）。
+  - 注意力机制打破了固定长度限制，允许解码器 (Decoder) 在生成每个词时，**动态直连并检索编码器 (Encoder) 中所有历史 Token 的隐藏状态**，实现了长文本无损信息检索。
+
+---
+
+### Q0.4: 什么是多头注意力机制 (Multi-Head Attention)？为什么单头注意力不够用？
+**标准回答**：
+- **概念**：将 Query, Key, Value 分别通过 $h$ 组独立的线性矩阵投影映射到 $h$ 个低维子空间，并行独立计算 $h$ 次 Scaled Dot-Product Attention，最后将 $h$ 个输出拼接 (Concat) 并通过 $W^O$ 投影。
+  $$\text{MultiHead}(Q, K, V) = \text{Concat}(\text{head}_1, \dots, \text{head}_h) W^O$$
+- **为什么单头不够用**：
+  - 单头注意力计算出来的权重分布往往只能关注全局最显著的一个位置（如被主语吸引）。
+  - 多头注意力允许模型**在不同的表征子空间中，同时捕捉不同位置、不同层次的多重关联特征**（例如 Head 1 关注句法逻辑，Head 2 关注指代关系，Head 3 关注时态）。
+
+---
+
+### Q0.5: 什么是位置编码 (Positional Encoding)？为什么 Transformer 必须加入位置编码？
+**标准回答**：
+- **必要性**：Self-Attention 计算本质上只有点积与加权求和，具有**置换不变性 (Permutation Invariance)**（打乱输入 Token 的顺序，输出结果完全相同）。没有位置信息，模型无法区分 "猫吃鱼" 和 "鱼吃猫"。
+- **主流演进路线**：
+  1. **绝对位置编码**：正弦/余弦固定周期函数 (Sinusoidal) 或可学习位置嵌入 (Learned Positional Embedding)。
+  2. **相对位置编码**：通过编码 Token 间的相对距离 (Relative Distance)，如 **RoPE (旋转位置编码)** 与 ALiBi，具备极佳的外推延伸性。
+
+---
+
+### Q0.6: 广义的“注意力机制 (Attention)”与 Transformer 中的“自注意力机制 (Self-Attention)”有何本质区别？
+**标准回答**：
+两者**并不冲突**，属于包含与演进关系：**自注意力 (Self-Attention) 是注意力机制 (Attention) 在单序列内部的一种具体实现变体**。
+
+| 对比维度 | 广义注意力机制 (如 Cross-Attention / 交叉注意力) | 自注意力机制 (Self-Attention / 自内注意力) |
+| :--- | :--- | :--- |
+| **数据来源** | $Q$ 来自**目标序列**（Decoder）；$K, V$ 来自**源头序列**（Encoder）。 | $Q, K, V$ **全部来自于同一个输入序列自身**。 |
+| **主要作用** | 衡量**两个不同序列**之间的跨序列关联（如源语言与目标语言词的对应关系）。 | 衡量**同一个序列内部**词与词之间的长距离语法、语义与指代依赖关系。 |
+| **典型代表** | 传统 Seq2Seq (Bahdanau Attention) 或 Transformer Encoder-Decoder 中的 Cross-Attention | Transformer 中的 Encoder / Decoder 内部 Self-Attention |
+
+---
+
 ## 一、 Transformer 架构与 Self-Attention 数学原理
 
 ### Q1: Self-Attention 注意力机制的公式是什么？为什么计算点积后要除以 $\sqrt{d_k}$？
@@ -160,6 +231,32 @@ graph TD
   2. **双量化 (Double Quantization)**：对量化缩放因子（Quantization Scales）再进行一次 8 位量化，每参数额外节省 0.37 个 Bit 的显存。
   3. **分页优化器 (Paged Optimizers)**：利用 CUDA 统一内存，在 Gradient Checkpointing 显存峰值时自动将优化器状态页移入系统 CPU 内存，防止 OOM。
 - **效果**：可以在单卡 24GB 显存（如 3090/4090）上微调 65B/70B 参数规模的超大模型。
+
+---
+
+### Q11: 详解 DeepSeek 核心架构创新：Multi-Head Latent Attention (MLA) 与 DeepSeek MoE 架构。
+**标准回答**（GitHub 2025/2026 高频热点考点）：
+- **Multi-Head Latent Attention (MLA, 多头潜在注意力)**：
+  - **痛点**：传统 MHA 的 KV Cache 显存巨大，MQA/GQA 虽然降低了显存但牺牲了部分模型表达能力。
+  - **原理**：将 Key 和 Value 向量通过低秩压缩矩阵（Low-Rank Compression）投影到一个极小维度的**潜在隐空间 (Latent Space)** $c_t^{KV}$ 中。在 KV Cache 中只持久化保存极小的隐向量 $c_t^{KV}$ 和解耦的位置编码。
+  - **优势**：将 KV Cache 的显存开销降低到极致（甚至低于 MQA），同时在推理阶段通过矩阵乘法结合性重组权重，保持与 MHA 完全一致的表达容量。
+- **DeepSeek MoE (细粒度混合专家架构)**：
+  - **细粒度专家切分**：将传统 MoE 包含的大专家切分为更多更小的微型专家（Fine-Grained Experts），激活组合更灵活。
+  - **共享专家隔离 (Shared Experts Isolation)**：单独设置固定的共享专家捕捉通用公共知识，路由专家专门捕捉特定域知识，彻底解决了传统 MoE 专家路由冗余的问题。
+
+---
+
+### Q12: 大模型偏好对齐 (Alignment)：RLHF (PPO) 与 DPO (直接偏好优化) 的区别？什么是 GRPO？
+**标准回答**：
+- **RLHF (基于人类反馈的强化学习 / PPO 算法)**：
+  - 需要训练 4 个模型：Actor（策略模型）、Ref（参考模型）、Reward（奖励模型）、Critic（价值模型）。
+  - **缺点**：系统极其复杂，训练非常不稳定，超参数敏感，显存开销巨大。
+- **DPO (Direct Preference Optimization, 直接偏好优化)**：
+  - **原理**：通过数学推导，证明了将奖励函数表达为 Actor 模型与 Ref 模型概率对数比的闭式解。直接利用二元交叉熵损失（Binary Cross-Entropy Loss）在偏好数据集 $(prompt, win\_ans, lose\_ans)$ 上拟合策略。
+  - **优势**：**无需训练 Reward 模型与 Critic 模型**，训练极其稳定，计算量大幅降低。
+- **GRPO (Group Relative Policy Optimization, 组相对策略优化 - DeepSeek-R1 核心)**：
+  - 针对推理/数学/代码等具备明确判定规则的任务。
+  - 对同一个 Prompt 采样生成一个输出组（Group of Outputs），直接计算组内各个输出的相对奖励（Group Relative Advantage），消除了对额外 Critic 模型的依赖，极大节省了 RL 训练显存。
 
 ---
 > 🏠 **[返回主页 README](../README.md)** \| ◀️ **上一篇：[01. 云原生与Python面试题](./01_%E4%BA%91%E5%8E%9F%E7%94%9F%E4%B8%8EPython%E9%AB%98%E9%A2%91%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ▶️ **下一篇：[03. LangChain与Agent架构题](./03_LangChain%E4%B8%8EAgent%E6%9E%B6%E6%9E%84%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ⚡ **[面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md)**

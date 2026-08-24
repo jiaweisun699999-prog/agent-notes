@@ -122,7 +122,7 @@ graph TD
 | :---: | :--- | :--- | :---: |
 | 00 | **面试前 30 分钟超级速记卡片** | 核心计算公式 (Attention, LoRA, KV Cache, RRF)、关键技术对比表、15 秒手写代码骨架与黑话 Checklist | [📄 阅读文档](./interview/00_面试冲刺30分钟速记卡片.md) |
 | 01 | **云原生容器化与 Python 高频面试题** | Namespace/cgroups 隔离、Overlay2 联合挂载、K8s 架构与 Service 负载均衡、`__new__`/`__init__` 区别、GC 分代回收与 GIL 锁解决 | [📄 阅读文档](./interview/01_云原生与Python高频面试题.md) |
-| 02 | **大模型基础与 Transformer 理论面试题** | Self-Attention 点积放缩推导、FlashAttention、MHA/GQA 演进、RoPE 旋转位置编码、Pre-LN 优势、LoRA 与 QLoRA 微调、INT4/INT8 量化 | [📄 阅读文档](./interview/02_大模型与Transformer理论面试题.md) |
+| 02 | **大模型基础与 Transformer 理论面试题** | RNN 串行瓶颈与 LSTM、CNN 卷积池化、Cross-Attention vs Self-Attention 区别、点积放缩推导、FlashAttention、RoPE、Pre-LN、LoRA 微调、INT4/INT8 量化 | [📄 阅读文档](./interview/02_大模型与Transformer理论面试题.md) |
 | 03 | **LangChain 与 Agent 架构面试题** | LCEL 管道符原理、ReAct 智能体 Loop 流程、Agentic RAG、长短记忆协同与 Token 截断、Guardrails 安全护栏、Anthropic MCP 协议 | [📄 阅读文档](./interview/03_LangChain与Agent架构面试题.md) |
 | 04 | **LangGraph 状态机与工作流面试题** | StateGraph 优势、Pregel 引擎 Superstep 机制、Checkpointer 与 Store 区别、多 Agent 3 大模式、Time-Travel 时间旅行、`interrupt()` | [📄 阅读文档](./interview/04_LangGraph高级工作流面试题.md) |
 | 05 | **RAG 检索增强生成与向量检索面试题** | 递归/语义切块、BM25+Dense 双路混合检索、RRF 融合与 Cross-Encoder Rerank、HyDE 假设性嵌入、单阶段预过滤、HNSW 索引 | [📄 阅读文档](./interview/05_RAG检索增强生成与向量检索面试题.md) |
@@ -131,6 +131,7 @@ graph TD
 | 08 | **大厂手写代码与白板编程题 (Live Coding)** | 手写 Self-Attention (含 Mask & Scaling)、手写 LoRA Linear 封装层、手写 BM25+Dense RRF 融合算法、手写 ReAct Agent Loop 引擎 | [📄 阅读文档](./interview/08_大厂手写代码与白板编程题.md) |
 | 09 | **面试反问与高情商沟通技巧 (16K-22K 指南)** | 尾声高级反问话术 (探寻技术瓶颈/架构)、16K-22K 薪资谈判与期望表达、高情商回答“最大的技术缺点/失败案例” | [📄 阅读文档](./interview/09_面试反问与高情商沟通技巧.md) |
 | 10 | **LangChain 与 LangGraph 全量 API 函数与方法速查手册** | 全量 API 函数汇总 (`bind_tools`, `with_structured_output`, `@tool`, `astream_events`, `StateGraph`, `interrupt`, `Command`, `update_state`, `get_state_history`, `as_retriever`) | [📄 阅读文档](./interview/10_LangChain与LangGraph全量API函数与方法速查手册.md) |
+| 11 | **Agent、LangChain、LangGraph 模块化精简题库套件** | 362 行全套整理版题库拆分为 8 大模块化子文档（包含 Transformer、LangChain 基础、长短期记忆、HITL/Guardrails、Runtime/MCP、LangGraph 架构/容错/流式与 Interrupt 五大禁忌） | [📦 浏览套件](./interview/agent_suite/README.md) |
 
 ---
 

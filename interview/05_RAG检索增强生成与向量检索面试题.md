@@ -122,4 +122,29 @@
   4. **Context Recall（上下文召回率）**：为了回答该问题，所需的所有关键事实是否都被成功检索出来。
 
 ---
+
+### Q9: 什么是 GraphRAG (知识图谱 RAG)？它相比传统 Vector RAG 有何重大突破？
+**标准回答**（GitHub 2025/2026 高频热点考点）：
+- **传统 Vector RAG 局限**：擅长寻找局部相似碎片（如“寻找包含 X 关键词的段落”），但在回答全局性概括问题（如“总结整个文档集的核心主题”）或多跳复杂推理（Multi-hop Reasoning）时效果极差。
+- **GraphRAG 核心机制 (Microsoft 提出)**：
+  1. **实体与关系抽取**：调用 LLM 从文档集中抽取实体 (Entities)、关系 (Relationships) 和关联文本块。
+  2. **社区发现 (Community Detection)**：使用 Leiden / Louvain 算法将全图划分为层次化的社区（Hierarchical Communities），并由 LLM 为每个社区生成结构化摘要报告。
+  3. **检索回答**：面对全局性提问时，直接在社区摘要和关系网络上做并行检索聚合。
+- **优势**：具备极强的全局总结理解能力和多跳关系推导能力。
+
+---
+
+### Q10: 什么是 Self-RAG 与 CRAG (Corrective RAG，纠错 RAG)？
+**标准回答**：
+- **Self-RAG (自我反思 RAG)**：
+  - 在生成过程中引入特殊的“反思标记” (Reflection Tokens，如 `[Retrieve]`, `[IsRel]`, `[IsSup]`, `[IsUse]`)。
+  - 模型动态自主决定何时检索、评估检索到的段落是否相关（IsRel）、评估生成内容是否完全被上下文支持（IsSup）以及评估生成结果是否有用（IsUse）。
+- **CRAG (Corrective RAG, 纠错 RAG)**：
+  - 增加轻量级**检索结果评估器 (Retrieval Evaluator)**。
+  - 根据置信度分为三种路径：
+    - **Correct（正确）**：直接送给 LLM 生成。
+    - **Incorrect（错误）**：放弃向量库检索结果，自动降级切换至 Web 搜索引擎补充实时信息。
+    - **Ambiguous（不确定）**：混合向量检索与 Web 搜索结果，提炼合并后再送给 LLM。
+
+---
 > 🏠 **[返回主页 README](../README.md)** \| ◀️ **上一篇：[04. LangGraph高级工作流题](./04_LangGraph%E9%AB%98%E7%BA%A7%E5%B7%A5%E4%BD%9C%E6%B5%81%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ▶️ **下一篇：[06. 推理加速与评估监控题](./06_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F%E3%80%81%E6%80%A7%E8%83%BD%E8%B0%83%E4%BC%98%E4%B8%8E%E8%AF%84%E4%BC%B0%E7%9B%91%E6%8E%A7%E9%9D%A2%E8%AF%95%E9%A2%98.md)** \| ⚡ **[面试 30 分钟速记](./00_面试冲刺30分钟速记卡片.md)**
