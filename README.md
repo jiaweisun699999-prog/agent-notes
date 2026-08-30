@@ -26,7 +26,7 @@
 
 ## 🗺️ 知识体系架构 (Roadmap)
 
-```mermaid
+```python
 graph TD
     A["📦 模块一：云原生基础设施<br/>(Docker / Kubernetes)"] --> B["🐍 模块二：Python 高级进阶<br/>(OOP / 并发 / 对象机制)"]
     B --> C["🧠 模块三：大模型理论基础<br/>(ML 算法 / Transformer 架构)"]
@@ -112,6 +112,10 @@ graph TD
 | 24 | **LangGraph 容错与重试机制** | 节点级 Retry Policy 策略、Fallback 降级机制与异常图状态自愈 | [📄 阅读文档](./24LangGraph容错.md) |
 | 25 | **LangGraph 流式输出 (Streaming)** | Stream Modes (`values`/`updates`/`custom`) 与大模型 Token 增量实时响应 | [📄 阅读文档](./25LangGraph流相关.md) |
 | 26 | **LangGraph 人工介入 (Interrupt)** | 动态打断控制、人工输入补充、状态改写与图节点继续运行 | [📄 阅读文档](./26LangGraph人工介入.md) |
+| 27 | **LangGraph 子图 (Subgraph)** | 子图嵌套机制、多 Agent 隔离编排与父子图 State 共享映射 | [📄 阅读文档](./27LangGraph%20子图.md) |
+| 28 | **LangGraph 时间旅行 (Time-Travel)** | 状态快照历史回溯、Checkpoint 复用、节点分叉 (Fork) 重走 | [📄 阅读文档](./28LangGraph时间旅行.md) |
+| 29 | **携程 AI 智能助手项目实战** | 携程 AI 智能助手两大架构对比分析 (自定义 Loop vs LangGraph) 与 16K-22K 面试指南 | [📄 阅读文档](./29携程AI智能助手项目_两种实现方式对比分析与面试指南.md) |
+| 30 | **携程新架构方案二 (new_ctrip)** | 携程新架构方案二核心知识点、节点流转状态机与生产技术难点 | [📄 阅读文档](./30携程新方式二_new_ctrip_核心知识点与技术难点手册.md) |
 
 ---
 
