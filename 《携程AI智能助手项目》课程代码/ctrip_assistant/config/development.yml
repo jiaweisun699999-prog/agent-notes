@@ -1,0 +1,21 @@
+LOG_LEVEL: INFO
+HOST: 127.0.0.1
+PORT: 8000
+ORIGINS: ['http://localhost:8080', 'http://127.0.0.1:8080', 'http://192.168.0.136:8080']
+DATABASE:
+  DRIVER: mysql
+  NAME: test_db4
+  HOST: 127.0.0.1
+  PORT: 3306
+  USERNAME: root
+  PASSWORD: 123123
+  QUERY:
+    charset: utf8mb4
+
+JWT_SECRET_KEY: 09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7
+ALGORITHM: HS256
+ACCESS_TOKEN_EXPIRE_MINUTES: 30
+
+WHITE_LIST: ['/api/login', '/api/register', '/static', '/docs', '/swagger', '/openapi', '/api/auth']
+
+DEFAULT_PASSWORD: 123123

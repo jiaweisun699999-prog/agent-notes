@@ -1,0 +1,23 @@
+{
+  "$schema": "https://langgra.ph/schema.json",
+  "dependencies": ["."],
+  "graphs": {
+    "my_graph": "./02_langgraph_use/05_tool_runtime_demo.py:agent",
+    "my_agent": "./02_langgraph_use/07_agent_demo.py:agentx",
+    "langgraph_checkpoint": "./03_langgraph_checkpointer/13_langgraph_checkpoint_demo/graph.py:graph",
+    "langgraph_store": "./04_langgraph_store/07_langgraph_store_demo/graph.py:graph"
+  },
+
+  "checkpointer": {
+    "backend": "custom",
+    "path": "./03_langgraph_checkpointer/13_langgraph_checkpoint_demo/checkpointer.py:get_checkpointer"
+  },
+
+  "store": {
+    "backend": "custom",
+    "path": "./04_langgraph_store/07_langgraph_store_demo/store.py:get_store"
+  },
+
+  "env": ".env",
+  "image_distro": "wolfi"
+}

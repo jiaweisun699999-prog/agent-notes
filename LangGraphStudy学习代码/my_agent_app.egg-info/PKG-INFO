@@ -1,0 +1,6 @@
+Metadata-Version: 2.4
+Name: my-agent-app
+Version: 0.1.0
+Requires-Python: >=3.10
+Requires-Dist: langgraph>=1.2
+Requires-Dist: langchain>=1.2

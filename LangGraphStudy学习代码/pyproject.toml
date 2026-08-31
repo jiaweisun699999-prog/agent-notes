@@ -1,0 +1,18 @@
+[project] # 项目元信息
+name = "my-agent-app"   # 包名，pip install 后注册的名字
+version = "0.1.0"       # 版本
+requires-python = ">=3.10"  # Python 版本下限
+dependencies = [            # 运行时依赖——pip install -e . 时自动安装
+    "langgraph>=1.2",
+    "langchain>=1.2",
+]
+
+[build-system]  # 声明构建工具
+requires = ["setuptools>=73.0.0"]   # 打包依赖：需要哪个版本的 setuptools 来构建这个包
+build-backend = "setuptools.build_meta" # 指定 setuptools 的现代 API 作为构建入口
+
+[tool.setuptools]   # setuptools 配置
+packages = ["all_package"]    # 声明这个项目包含的包名列表，这里只有一个叫 "all_package" 的包
+
+[tool.setuptools.package-dir]
+"all_package" = "." # 将包名 "all_package" 映射到当前目录（项目根目录）
