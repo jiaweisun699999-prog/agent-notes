@@ -1,6 +1,6 @@
 # 🤖 AI Agent、LangChain、LangGraph 模块化精简面试题库套件
 
-> 本套件由用户整理的 362 行《AI Agent、LangChain、LangGraph 全套面试题库》重构拆分而成。将原本融为一体的长文档按技术模块细分为 **8 篇高度聚焦的专题文档**，方便模块化专项复习与查阅。
+> 本套件由用户整理的《AI Agent、LangChain、LangGraph 全套面试题库》重构拆分而成。将原本融为一体的长文档按技术模块细分为 **10 篇高度聚焦的专题文档**，方便模块化专项复习与查阅。
 
 ---
 
@@ -16,6 +16,8 @@
 | 06 | **LangGraph 工作流模式与架构设计面试题** | LangGraph 基础能力、五步设计法、5 种工作流模式、ToolRunTime vs ToolNode、Checkpointer 3 核心概念与持久化模式 (共 13 题) | [📄 阅读文档](./06_LangGraph工作流模式与架构设计.md) |
 | 07 | **LangGraph 容错机制与全量流式输出面试题** | 3 种容错策略（重试/超时/错误处理）、go_to 作用、7 种流式输出模式、v1/v2/v3 差异、LLM 过滤与事件流/运行流 (共 12 题) | [📄 阅读文档](./07_LangGraph容错机制与全量流式输出.md) |
 | 08 | **LangGraph 高级 HITL 与 Interrupt 核心规则** | interrupt 正常工作 3 必要条件与内部 5 步骤、中断恢复要点、v3 惰性流、交互式 HITL 5 种模式与 5 条黄金规则 (共 6 题) | [📄 阅读文档](./08_LangGraph高级HITL与Interrupt核心规则.md) |
+| 09 | **LangGraph 子图与时间旅行高级实战** | 子图定义与通信模式（挂载 vs 显式 invoke）、Schema 映射与坑点、3 种持久化模式、Sub-Agent 模式、Time-Travel、Replay/Fork、中断中 Fork (共 13 题) | [📄 阅读文档](./09_LangGraph子图与时间旅行高级实战.md) |
+| 10 | **三大企业级项目实战面试题精通指南** | 携程 AI 助手 (自定义 Loop 演进 LangGraph、多 Agent 隔离、Saga 事务)、RAG 知识库 (merge_title_content、Milvus BM25+Dense、RRF、CRAG/Adaptive、MCP)、多模态 RAG (dots_ocr、Vision-LLM 描述、RateLimiter 防 429、RAGAS 评估)、项目上下文工程 (Tool返回值剪枝、Handle模式、Prefix Caching)、多 Agent 架构选型 (4大拓扑对比)、格式自愈与三层高可用降级 (共 15 题) | [📄 阅读文档](./10_三大企业级项目实战面试题精通指南.md) |
 
 ---
 

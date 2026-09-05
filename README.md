@@ -149,7 +149,7 @@ graph TD
 | 08 | **大厂手写代码与白板编程题 (Live Coding)** | 手写 Self-Attention (含 Mask & Scaling)、手写 LoRA Linear 封装层、手写 BM25+Dense RRF 融合算法、手写 ReAct Agent Loop 引擎 | [📄 阅读文档](./interview/08_大厂手写代码与白板编程题.md) |
 | 09 | **面试反问与高情商沟通技巧 (16K-22K 指南)** | 尾声高级反问话术 (探寻技术瓶颈/架构)、16K-22K 薪资谈判与期望表达、高情商回答“最大的技术缺点/失败案例” | [📄 阅读文档](./interview/09_面试反问与高情商沟通技巧.md) |
 | 10 | **LangChain 与 LangGraph 全量 API 函数与方法速查手册** | 全量 API 函数汇总 (`bind_tools`, `with_structured_output`, `@tool`, `astream_events`, `StateGraph`, `interrupt`, `Command`, `update_state`, `get_state_history`, `as_retriever`) | [📄 阅读文档](./interview/10_LangChain与LangGraph全量API函数与方法速查手册.md) |
-| 11 | **Agent、LangChain、LangGraph 模块化精简题库套件** | 362 行全套整理版题库拆分为 8 大模块化子文档（包含 Transformer、LangChain 基础、长短期记忆、HITL/Guardrails、Runtime/MCP、LangGraph 架构/容错/流式与 Interrupt 五大禁忌） | [📦 浏览套件](./interview/agent_suite/README.md) |
+| 11 | **Agent、LangChain、LangGraph 模块化精简题库套件** | 全套整理版题库拆分为 10 大模块化子文档（涵盖 Transformer、LangChain、记忆管理、HITL/Guardrails、Runtime/MCP、LangGraph 架构/容错/流式、Interrupt 规则、子图与时间旅行，以及携程/RAG/多模态 RAG 三大企业级项目实战指南） | [📦 浏览套件](./interview/agent_suite/README.md) |
 
 ---
 
