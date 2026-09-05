@@ -18,7 +18,7 @@
 
 - 🔄 **动态演进**：作者保持长期持续更新，紧跟 AI 与云原生技术前沿，不断补充最新的技术总结与项目实战经验。
 - 🧱 **全栈贯通**：涵盖底层云原生容器基础设施、Python 底层机制、大模型理论算法与上层 Agent 应用层开发。
-- 📊 **模块化分类**：将 28 篇核心学习文档划分为 6 大主题模块，循序渐进，查阅高效。
+- 📊 **模块化分类**：将 34 篇核心学习文档划分为 8 大主题模块，循序渐进，查阅高效。
 - 🎯 **深度落地**：不仅包含核心概念剖析，更包含踩坑经验、运行时上下文管理、记忆系统、人工介入与安全护栏等真实生产环境实战总结。
 - 🔗 **一键跳转**：全目录支持 Markdown 相对路径跳转，在线阅读或配合 VS Code / Obsidian 本地学习无缝衔接。
 
@@ -32,7 +32,7 @@ graph TD
     B --> C["🧠 模块三：大模型理论基础<br/>(ML 算法 / Transformer 架构)"]
     C --> D["🦜🔗 模块四：LangChain 生态应用<br/>(Models / Chains / Agent 实战)"]
     D --> E["🤖 模块五：Agent 核心机制与架构<br/>(Memory / MCP 协议 / Guardrails)"]
-    E --> F["🕸️ 模块六：LangGraph 复杂工作流<br/>(StateGraph / Checkpointer / Interrupt)"]
+    E --> F["🕸️ 模块六：LangGraph 复杂工作流<br/>(StateGraph / Checkpointer / Interrupt)"] --> G["🚀 模块八：RAG 与多模态 RAG 企业级实战<br/>(Milvus 2.5 / dots_ocr / RAGAS / GraphRAG)"]
 ```
 
 ---
@@ -59,7 +59,7 @@ graph TD
 | 06 | **Python 函数篇** | 闭包、高阶函数、装饰器设计模式及参数传递机制 | [📄 阅读文档](./06Python函数篇.md) |
 | 07 | **Python 面向对象+模块+异常总结** | OOP 继承封装多态、模块包导入机制与异常捕获体系 | [📄 阅读文档](./07Python面向对象+模块+异常总结.md) |
 | 08 | **Python 高级编程总结** | 迭代器与生成器、魔术方法 (Magic Methods)、元类与动态类型 | [📄 阅读文档](./08Python高级编程总结.md) |
-| 09 | **Python `__new__` / `__init__` / `__call__` 详解** | 对象创建与初始化底层区别、单例模式应用及经典踩坑小记 | [📄 阅读文档](./09Python%20__new__%E3%80%81__init__%E3%80%81__call__%20%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB%20%2B%20%E6%89%80%E6%9C%89%E5%9D%91%E7%82%B9%E5%B0%8F%E8%AE%B0.md) |
+| 09 | **Python `__new__` / `__init__` / `__call__` 详解** | 对象创建与初始化底层区别、单例模式应用及经典踩坑小记 | [📄 阅读文档](./09Python __new__、__init__、__call__ 核心区别 + 所有坑点小记.md) |
 | 10 | **Python 网络与并发编程** | Socket 网络通信、多线程、多进程、GIL 影响与 asyncio 协程并发 | [📄 阅读文档](./10Python网络与并发编程.md) |
 
 ---
@@ -116,6 +116,20 @@ graph TD
 | 28 | **LangGraph 时间旅行 (Time-Travel)** | 状态快照历史回溯、Checkpoint 复用、节点分叉 (Fork) 重走 | [📄 阅读文档](./28LangGraph时间旅行.md) |
 | 29 | **携程 AI 智能助手项目实战** | 携程 AI 智能助手两大架构对比分析 (自定义 Loop vs LangGraph) 与 16K-22K 面试指南 | [📄 阅读文档](./29携程AI智能助手项目_两种实现方式对比分析与面试指南.md) |
 | 30 | **携程新架构方案二 (new_ctrip)** | 携程新架构方案二核心知识点、节点流转状态机与生产技术难点 | [📄 阅读文档](./30携程新方式二_new_ctrip_核心知识点与技术难点手册.md) |
+
+---
+
+### 🚀 模块八：RAG 企业知识库与多模态 RAG 实战项目 (Enterprise RAG & Multimodal RAG)
+> 从单路文本 RAG、CRAG/Adaptive RAG 到多模态 (Vision-LLM/dots_ocr) 与 RAGAS 自动化评估的全栈工程落地与源码解析。
+
+| 序号 | 模块 / 文档名称 | 核心知识点与主要内容 | 快速跳转 |
+| :---: | :--- | :--- | :---: |
+| 31 | **RAG 企业知识库与 Milvus 实战** | Milvus 向量数据库 schema 设计、Dense + BM25 混合检索、RRF 融合算法与 LangGraph 整合 | [📄 阅读文档](./31RAG+LangGraph+Milvus.md) |
+| 32 | **RAG 企业知识库项目架构与源码解析** | RAG 企业知识库全套代码结构拆解、Markdown 结构化解析、Agent/CRAG 节点与 MCP 拓展 | [📄 阅读文档](./32RAG企业知识库项目_目录结构与功能解析.md) |
+| 33 | **多模态 RAG 与 RAGAS 实战项目架构解析** | 工业级多模态 RAG 架构、dots_ocr 解析、Vision-LLM 图像语义化、Gradio UI 与 RAGAS 评估 | [📄 阅读文档](./33多模态RAG与RAGAS实战项目_架构与源码详解.md) |
+| 34 | **多模态 RAG 与 RAGAS 全栈进阶与源码解析手册** | 纯文本与多模态两大阶段演进全景手册、42 课时源码映射大纲、数学原理与生产踩坑指南 | [📄 阅读文档](./34多模态RAG与RAGAS实战项目全栈进阶学习与源码解析手册.md) |
+| 35 | **GraphRAG 与多模态 RAG+Ragas 项目开发讲义** | GraphRAG、多模态 RAG 架构及 Ragas 评估全套项目开发与实战讲义 PPT/PDF | [📄 打开 PDF](./35GraphRAG+多模态RAG+Ragas的项目开发.pdf) |
+
 
 ---
 

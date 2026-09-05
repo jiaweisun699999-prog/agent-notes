@@ -1,0 +1,1 @@
+[{"bbox": [126, 147, 537, 393], "category": "Text", "text": "//关闭资源\noverride def close(): Unit = {\n  //关闭线程池\n  executorService.shutdown()\n}\n"}]

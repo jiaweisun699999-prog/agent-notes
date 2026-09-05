@@ -1,0 +1,25 @@
+我们可以选择IntelliJ IDEA或者Eclipse作为Flink应用的开发IDE, Flink开发官方建议使用IntelliJ IDEA, 因为它默认集成了Scala和Maven环境, 使用更加方便, 我们这门课使用IntelliJ IDEA开发工具, 具体安装步骤不再详述。
+
+*   **Maven环境**
+
+通过IntelliJ IDEA进行开发Flink Application时, 可以使用Maven来作为项目jar包管理工具, 需要在本地安装Maven及配置Maven的环境变量, 需要注意的是, Maven版本需要使用3.0.4及以上, 否则编译或开发过程中会有问题。这里使用Maven 3.2.5版本。
+
+*   **Scala环境**
+
+Flink开发语言可以选择Java、Scala、Python, 如果用户选择使用Scala作为Flink应用开发语言, 则需要安装Scala执行环境。
+
+在Flink1.15之前版本, 如果只是使用Flink的Java api, 对于一些没有Scala模块的包和表相关模块的包需要在Maven引入对应的包中加入scala后缀, 例如: flink-table-planner_2.11, 后缀2.11代表的就是Scala版本。在Flink1.15.0版本后, Flink添加对opting-out (排除) Scala的支持, 如果你只使用Flink的Java api, 导入包也不必包含scala后缀, 你可以使用任何Scala版本。如果使用Flink的Scala api, 需要选择匹配的Scala版本。
+
+从Flink1.7版本往后支持Scala 2.11和2.12版本, 从Flink1.15.0版本后只支持Scala 2.12, 不再支持Scala 2.11。Scala环境可以通过本地安装Scala执行环境, 也可以通过Maven依赖Scala-lib引入, 如果本地安装了Scala某个版本, 建议在Maven中添加Scala-lib依赖。Scala2.12.8之后的版本与之前的2.12.x版本不兼容, 建议使用Scala2.12.8之后版本。
+
+*   **Hadoop环境**
+
+Flink可以操作HDFS中的数据及基于Yarn进行资源调度, 所以需要对应的Hadoop环境, Flink1.16.0版本支持的Hadoop最低版本为2.8.5, 本课程中我们使用Hadoop3.3.4版本。关于Hadoop3.3.4版本搭建, 参照第三章节。
+
+## 2.2 Flink入门案例
+
+需求: 读取本地数据文件, 统计文件中每个单词出现的次数。
+
+### 2.2.1 IDEA Project创建及配置
+
+本课程编写Flink代码选择语言为Java和Scala, 所以这里我们通过IntelliJ IDEA创建一个目录, 其中包括Java项目模块和Scala项目模块, 将Flink Java api和Flink Scala api分别在不同项目模块中实现。步骤如下:

@@ -1,3 +1,8 @@
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **31. RAG 企业知识库与 Milvus 向量检索实战**
+> 🏠 [返回主页 README](./README.md) | ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) | 💻 [白板手写代码](./interview/08_大厂手写代码与白板编程题.md)
+
+---
+
 # RAG企业知识库项目+LangGraph
 
 # 第一章：Milvus
@@ -713,3 +718,8 @@ Adaptive RAG 是一种动态调整检索和生成策略的 RAG 增强范式，�
 ![image.png](./images/31RAG+LangGraph+Milvus_718727c8ef2645e883f3f15e7f2e1588_711b66.png)
 
 ![image.png](./images/31RAG+LangGraph+Milvus_c7169daf7f0944959fc2d216552e53c0_a9947c.png)
+
+---
+
+> 📌 **[AI 大模型与云原生全栈知识库](./README.md)** / **31. RAG 企业知识库与 Milvus 向量检索实战**
+> 🏠 [返回主页 README](./README.md) | ⚡ [面试 30 分钟速记](./interview/00_面试冲刺30分钟速记卡片.md) | 💻 [白板手写代码](./interview/08_大厂手写代码与白板编程题.md)

@@ -1,0 +1,22 @@
+1.2.2 Flink集群架构
+
+如图1-9所示,Flink集群主要包含3部分:JobManager、
+TaskManager和客户端,三者均为独立的JVM进程。Flink集群启动后,
+会至少启动一个JobManager和多个TaskManager。客户端将任务提交到
+JobManager,JobManager再将任务拆分成Task并调度到各个
+TaskManager中执行,最后TaskManager将Task执行的情况汇报给
+JobManager。
+
+客户端是Flink专门用于提交任务的客户端实现,可以运行在任何
+设备上,并且兼容Windows、macOS、Linux等操作系统,只需要运行环
+境与JobManager之间保持网络畅通即可。用户可以通过./bin/flink
+run命令或Scala Shell交互式命令行提交作业。客户端会在内部运行
+提交的作业,然后基于作业的代码逻辑构建JobGraph结构,最终将
+JobGraph提交到运行时中运行。JobGraph是客户端和集群运行时之间
+约定的统一抽象数据结构,也就是说,不管是什么类型的作业,都会
+通过客户端将提交的应用程序构建成JobGraph结构,最后提交到集群
+上运行。
+
+JobManager是整个集群的管理节点,负责接收和执行来自客户端提交的JobGraph。JobManager也会负责整个任务的Checkpoint协调工作,内部负责协调和调度提交的任务,并将JobGraph转换为ExecutionGraph结构,然后通过调度器调度并执行ExecutionGraph的节点。ExecutionGraph中的ExecutionVertex节点会以Task的形式在TaskManager中执行。
+
+see more please visit: https://homeofpdf.com

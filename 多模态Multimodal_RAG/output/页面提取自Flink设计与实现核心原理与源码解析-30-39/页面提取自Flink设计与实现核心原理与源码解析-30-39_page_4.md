@@ -1,0 +1,5 @@
+ResourceManager组件进行统一协调和管理，而任务中并行的Task会被分配到Slot计算资源中。
+
+根据底层集群资源管理器的不同，TaskManager的启动方式及资源管理形式也会有所不同。例如，在基于Standalone模式的集群中，所有的TaskManager都是按照固定数量启动的；而YARN、Kubernetes等资源管理器上创建的Flink集群则支持按需动态启动TaskManager节点。第5章将详细介绍TaskManager的动态伸缩和管理。
+
+see more please visit: https://homeofpdf.com

@@ -1,0 +1,1 @@
+[{"bbox": [111, 95, 1576, 1409], "category": "Picture"}, {"bbox": [111, 1440, 1541, 1538], "category": "Text", "text": "创建好“FlinkScalaCode”模块后，右键该模块添加Scala框架支持，并修改该模块中的“java”src源为“scala”:"}]
