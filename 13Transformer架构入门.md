@@ -1056,7 +1056,7 @@ $$\text{Loss} = -\frac{1}{T} \sum_{t=1}^{T} \log P(y_t^* \mid y_{<t}^*, X)$$
 
 Transformer 的训练对学习率极其敏感，原论文采用了带 **Warm-up（预热）** 的 **Adam 优化器**（$\beta_1=0.9, \beta_2=0.98$）：
 
-$$\text{lr} = d_{\text{model}}^{-0.5} \cdot \min\left(\text{step\_num}^{-0.5}, \text{step\_num} \cdot \text{warmup\_steps}^{-1.5}\right)$$
+$$\text{lr} = d_{\text{model}}^{-0.5} \cdot \min\left(\text{step}_{\text{num}}^{-0.5}, \text{step}_{\text{num}} \cdot \text{warmup}_{\text{steps}}^{-1.5}\right)$$
 
 - **前 $k$ 步（Warm-up 阶段）**：学习率从 0 **线性增加**。由于刚开始权重是随机的、梯度不稳定，小学习率能防止模型崩盘。
 - **后期（Decay 阶段）**：学习率按**反平方根按步衰减**，帮助模型平稳收敛到局部最优解。

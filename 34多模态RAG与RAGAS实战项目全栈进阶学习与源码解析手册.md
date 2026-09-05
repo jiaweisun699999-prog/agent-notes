@@ -446,7 +446,7 @@ Milvus 2.5 混合检索使用 `WeightedRanker` 或 `RRFRanker`（互易等级融
 #### 6.3.1 RRF 算法公式
 不依赖原始相似度得分的绝对值，仅根据文档在两路检索中的**排名 (Rank)** 计算：
 
-$$\text{RRF\_Score}(d) = \sum_{i \in \{\text{dense}, \text{sparse}\}} \frac{1}{k + \text{rank}_i(d)}$$
+$$\text{RRF}_{\text{Score}}(d) = \sum_{i \in \{\text{dense}, \text{sparse}\}} \frac{1}{k + \text{rank}_i(d)}$$
 
 其中 $k$ 为平滑因子（经验推荐 $k=60$）。
 

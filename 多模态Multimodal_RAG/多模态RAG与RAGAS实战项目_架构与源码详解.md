@@ -70,7 +70,7 @@ Multimodal_RAG/
 ### 2. API 限速锁与 429 异常指数退避重试 (Exponential Backoff)
 - **技术痛点**：并发将大量图片传给 Vision LLM 并生成向量时，极易触发大模型 API 的 429 (Rate Limit Exceeded) 限制。
 - **解决方案**：在 `db_operator.py` 中引入了令牌锁（`limiter.acquire()`）与动态随机抖动指数退避机制：
-  $$\text{Backoff\_Time} = \text{BASE\_BACKOFF} \times 2^{\text{attempts}-1} \times (0.8 + \text{random} \times 0.4)$$
+  $$\text{Backoff}_{\text{Time}} = \text{BASE}_{\text{BACKOFF}} \times 2^{\text{attempts}-1} \times (0.8 + \text{random} \times 0.4)$$
 
 ### 3. LangGraph 静态中断与人工审批 (Human-in-the-Loop)
 - **技术痛点**：如何在回答暴露给终端用户前进行质量兜底？

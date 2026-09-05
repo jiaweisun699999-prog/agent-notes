@@ -393,7 +393,7 @@ $$\text{Score} = w_{\text{dense}} \times S_{\text{dense}} + w_{\text{sparse}} \t
 
 ##### B. 互易等级融合 (`RRFRanker`)
 RRF 算法不依赖向量得分的绝对数值（解决 Dense 与 Sparse 得分量纲不一致的问题），而是根据文档在各路检索中的**排名（Rank）**进行融合计算：
-$$\text{RRF\_Score}(d) = \sum_{i=1}^{N} \frac{1}{k + \text{rank}_i(d)}$$
+$$\text{RRF}_{\text{Score}}(d) = \sum_{i=1}^{N} \frac{1}{k + \text{rank}_i(d)}$$
 其中 $N$ 为检索路径数量（通常为 2），$\text{rank}_i(d)$ 为文档 $d$ 在第 $i$ 路检索中的排名（1-indexed），$k$ 为平滑因子（通常取 60 或 100）。
 
 ##### 🧮 RRF 案例计算推导 (平滑因子 $k=60$ vs $k=100$)：
