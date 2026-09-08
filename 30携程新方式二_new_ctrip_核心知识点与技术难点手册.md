@@ -28,7 +28,7 @@
 
 `new_ctrip` 采用了 LangGraph 官方推崇的 **主管-专家分工（Supervisor-Worker Architecture）**：
 
-```Mermaid
+```mermaid
 flowchart TD
     Start([START]) --> FetchUser[fetch_user_info 节点]
     FetchUser --> Supervisor[Supervisor 主管 Agent]
@@ -249,7 +249,7 @@ def run_interactive_loop(user_input: str, config: dict):
 
 #### 解法 2：树状/层级化主管架构（Hierarchical Supervisor Tree）
 将单层扁平 Supervisor 拆解为“总主管 - 分主管”层级树状结构：
-```Mermaid
+```mermaid
 flowchart TD
     User([用户提问]) --> TopSupervisor[Top-Level 总主管 Agent]
     TopSupervisor -->|出行业务| TravelSupervisor[旅务分主管]
@@ -341,7 +341,7 @@ flowchart TD
 
 针对“既要 100% 不截断处理 100+ 问题，又要防刷截断限制”的双重诉求，设计 **分级服务架构（Tiered Service Architecture）**：
 
-```Mermaid
+```mermaid
 flowchart TD
     UserQuery[用户输入 100 个问题] --> Router{API 网关路由鉴权}
 
