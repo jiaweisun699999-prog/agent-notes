@@ -34,7 +34,7 @@
 
 `RAG_PROJECT` 与 `RAG_PROJECT2` 的核心代码结构保持一致，下面对各功能模块及其代表性文件进行详细解析：
 
-```
+```python
 《RAG企业知识库项目》课程代码/
 ├── RAG_PROJECT/                   # RAG 核心主项目
 │   ├── agent/                     # LangChain Agent 智能体实现
@@ -703,7 +703,7 @@ COLLECTION_NAME = os.getenv("COLLECTION_NAME", "rag_enterprise_kb")
 ### 1. RAGAS 四维量化评估指标 (RAG Evaluation)
 评估一个企业知识库 RAG 系统的好坏，推荐使用 **RAGAS (RAG Assessment)** 框架进行自动化量化测试：
 
-```
+```python
                 ┌────────────────────────────────────────┐
                 │         RAG 评估四大黄金指标            │
                 └───────────────────┬────────────────────┘

@@ -415,7 +415,7 @@ OpenSandbox 就是这个项目的**唯一安全边界**。所有 Agent 行为—
 
 #### 2\.1 沙箱创建链路
 
-![diagram\-flowchart\.png](图片和附件2/diagram-flowchart.png)
+![diagram\-flowchart\.png](./images/37基于Harness_Engineering架构的企业实战项目_diagram-flowchart_557025.png)
 
 #### 2\.2 命令执行链路（正常路径）
 
@@ -429,11 +429,11 @@ OpenSandbox 就是这个项目的**唯一安全边界**。所有 Agent 行为—
 
 #### 2\.4 预热\-认领\-补充 时序图
 
-![diagram\-sequence\.png](图片和附件2/diagram-sequence.png)
+![diagram\-sequence\.png](./images/37基于Harness_Engineering架构的企业实战项目_diagram-sequence_785ed4.png)
 
 #### 2\.5 用户作用域沙箱隔离模型
 
-![image\.png](图片和附件2/image.png)
+![image\.png](./images/37基于Harness_Engineering架构的企业实战项目_image_51253e.png)
 
 #### 2\.6 总结：五组件分工
 
@@ -499,7 +499,7 @@ OpenSandbox 就是这个项目的**唯一安全边界**。所有 Agent 行为—
 
 ### 二、Skills的总体流程
 
-![Mermaid\.jpg](图片和附件2/Mermaid.jpg)
+![Mermaid\.jpg](./images/37基于Harness_Engineering架构的企业实战项目_Mermaid_d5b6d4.jpg)
 
 
 

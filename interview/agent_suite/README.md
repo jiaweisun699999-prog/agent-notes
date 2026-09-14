@@ -1,6 +1,11 @@
 # 🤖 AI Agent、LangChain、LangGraph 模块化精简面试题库套件
 
-> 本套件由用户整理的《AI Agent、LangChain、LangGraph 全套面试题库》重构拆分而成。将原本融为一体的长文档按技术模块细分为 **10 篇高度聚焦的专题文档**，方便模块化专项复习与查阅。
+> 📌 **[AI 大模型与云原生全栈知识库](../../README.md)** / **Agent & LangGraph 模块化题库套件**
+> 🏠 [返回主页 README](../../README.md) | ⚡ [面试 30 分钟速记](../00_面试冲刺30分钟速记卡片.md) | 💻 [白板手写代码](../08_大厂手写代码与白板编程题.md)
+
+---
+
+> 本套件由用户整理的《AI Agent、LangChain、LangGraph 全套面试题库》重构拆分而成。将原本融为一体的长文档按技术模块细分为 **11 篇高度聚焦的专题文档**，方便模块化专项复习与查阅。
 
 ---
 
@@ -18,7 +23,8 @@
 | 08 | **LangGraph 高级 HITL 与 Interrupt 核心规则** | interrupt 正常工作 3 必要条件与内部 5 步骤、中断恢复要点、v3 惰性流、交互式 HITL 5 种模式与 5 条黄金规则 (共 6 题) | [📄 阅读文档](./08_LangGraph高级HITL与Interrupt核心规则.md) |
 | 09 | **LangGraph 子图与时间旅行高级实战** | 子图定义与通信模式（挂载 vs 显式 invoke）、Schema 映射与坑点、3 种持久化模式、Sub-Agent 模式、Time-Travel、Replay/Fork、中断中 Fork (共 13 题) | [📄 阅读文档](./09_LangGraph子图与时间旅行高级实战.md) |
 | 10 | **三大企业级项目实战面试题精通指南** | 携程 AI 助手 (自定义 Loop 演进 LangGraph、多 Agent 隔离、Saga 事务)、RAG 知识库 (merge_title_content、Milvus BM25+Dense、RRF、CRAG/Adaptive、MCP)、多模态 RAG (dots_ocr、Vision-LLM 描述、RateLimiter 防 429、RAGAS 评估)、项目上下文工程 (Tool返回值剪枝、Handle模式、Prefix Caching)、多 Agent 架构选型 (4大拓扑对比)、格式自愈与三层高可用降级 (共 15 题) | [📄 阅读文档](./10_三大企业级项目实战面试题精通指南.md) |
+| 11 | **DeepAgents & Harness Engineering 核心架构面试题** | DeepAgents 与 LangChain/LangGraph 三层定位、Harness Engineering 核心设计理念、虚拟文件系统状态后端、多 Sub-Agent 隔离、沙箱安全执行、渐进式披露与上下文压缩、STAR 答题话术与追问 (共 16 题) | [📄 阅读文档](./11_DeepAgents%20&%20Harness%20Engineering%20核心架构面试题.md) |
 
 ---
 
-> 🏠 **[返回主页 README](../../README.md)** | ⚡ **[面试 30 分钟速记](../00_面试冲刺30分钟速记卡片.md)**
+> 🏠 **[返回主页 README](../../README.md)** | ⚡ **[面试 30 分钟速记](../00_面试冲刺30分钟速记卡片.md)** | 💻 **[白板手写代码](../08_大厂手写代码与白板编程题.md)**

@@ -94,7 +94,7 @@
 
 ### 1.3 项目全景目录结构与源码文件映射
 
-```
+```python
 《企业级 RAG 与多模态 RAG 实战项目》/
 ├── RAG_PROJECT/                   # [前阶段 1] 纯文本 RAG 与 LangGraph 智能图控
 │   ├── agent/rag_agent.py         # Tool Calling Agent 与对话记忆集成

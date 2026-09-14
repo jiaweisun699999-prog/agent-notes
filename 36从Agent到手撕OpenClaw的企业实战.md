@@ -247,13 +247,13 @@ DeepAgents 框架本身就是 Harness Engineering 思想的**具体实现**。De
 
     - **卸载大型工具输入和结果**：当工具调用的输入或结果超过一定大小时（默认20，000 tokens），智能体会自动将其内容保存到文件系统，并在对话历史中用文件路径和摘要替换，以节省上下文空间。当会话上下文超过模型窗口的85%时，会触发此操作。
 
-![WntPb02tZogYrjxjdtHcLoIpn8b\.png](图片和附件/WntPb02tZogYrjxjdtHcLoIpn8b.png)
+![WntPb02tZogYrjxjdtHcLoIpn8b\.png](./images/36从Agent到手撕OpenClaw的企业实战_WntPb02tZogYrjxjdtHcLoIpn8b_454d15.png)
 
-![AL5qbAtBIo5lsGxSKm8cgEBmnEh\.png](图片和附件/AL5qbAtBIo5lsGxSKm8cgEBmnEh.png)
+![AL5qbAtBIo5lsGxSKm8cgEBmnEh\.png](./images/36从Agent到手撕OpenClaw的企业实战_AL5qbAtBIo5lsGxSKm8cgEBmnEh_a71bab.png)
 
     - **摘要化 \(Summarization\)**：当上下文大小达到极限且无可卸载内容时，智能体会将过去的对话历史总结为一段结构化摘要，替换原有的详细历史，同时将完整历史保存到文件系统。
 
-![GKFzb7O2mo8sKQx68SOcAeo5nYv\.png](图片和附件/GKFzb7O2mo8sKQx68SOcAeo5nYv.png)
+![GKFzb7O2mo8sKQx68SOcAeo5nYv\.png](./images/36从Agent到手撕OpenClaw的企业实战_GKFzb7O2mo8sKQx68SOcAeo5nYv_018d15.png)
 
 - **长期记忆 \(Long\-term memory\)**：通过混合存储后端，允许智能体将特定路径（如 `/memories/`）下的信息持久化存储，使其能够跨不同的会话和线程访问，用于存储用户偏好、累积知识等。
 
@@ -1172,7 +1172,7 @@ def personalized_search(query: str, config) -> str:
 
 - 你的电脑、账号、文件、网络都被挡在外面。
 
-![tongyi\-mermaid\-2026\-04\-18\-165944\.png](图片和附件/tongyi-mermaid-2026-04-18-165944.png)
+![tongyi\-mermaid\-2026\-04\-18\-165944\.png](./images/36从Agent到手撕OpenClaw的企业实战_tongyi-mermaid-2026-04-18-165944_8e80ec.png)
 
 **沙箱的工具集**
 
@@ -1311,7 +1311,7 @@ agent = create_deep_agent(
 
 ## 4、自定义企业服务器的SandBox
 
-![image\.png](图片和附件/image.png)
+![image\.png](./images/36从Agent到手撕OpenClaw的企业实战_image_fd1ae8.png)
 
 ### **一、OpenSandbox相关介绍**
 
@@ -2166,7 +2166,7 @@ Deep Agents 中的上下文压缩机制，其底层逻辑源于一个已知的�
 
 - 触发条件：当Agent调用一个工具（如`read_file`读取大文件、`execute`执行Shell命令、调用返回大量数据的API），其返回结果的大小超过阈值时，剪裁立即触发。
 
-![deepseek\_mermaid\_20260425\_190f05\.png](图片和附件/deepseek_mermaid_20260425_190f05.png)
+![deepseek\_mermaid\_20260425\_190f05\.png](./images/36从Agent到手撕OpenClaw的企业实战_deepseek_mermaid_20260425_190f05_134a1d.png)
 
 **注意：此策略对Agent行为的影响是即时的，可以防止单个工具调用导致的上下文溢出。该阈值（****`BIG_TOOL_RESULT_LIMIT`****）目前是一个内部硬编码常量，无法通过外部API直接修改。**
 
@@ -2180,7 +2180,7 @@ Deep Agents 中的上下文压缩机制，其底层逻辑源于一个已知的�
 
 这里清理的目标是历史中`write_file`或`edit_file`这类“写入型”工具调用的参数。因为这些参数包含了完整的文件内容，而且这些内容已经被持久化到了文件系统，所以在上下文中保留它们是冗余的。
 
-![deepseek\_mermaid\_20260425\_19c907\.png](图片和附件/deepseek_mermaid_20260425_19c907.png)
+![deepseek\_mermaid\_20260425\_19c907\.png](./images/36从Agent到手撕OpenClaw的企业实战_deepseek_mermaid_20260425_19c907_5ff770.png)
 
 **注意：触发该机制的80%或85%这个比例，同样是一个内部硬编码常量，无法直接在外部修改。但它依赖的模型最大输入 token 数，可以通过 LangChain 的模型配置文件（Model Profiles） 进行管理。**
 
@@ -2204,7 +2204,7 @@ Deep Agents 中的上下文压缩机制，其底层逻辑源于一个已知的�
 
 3. 可选的主动触发：除了被动触发，从 `v0.4` 版本开始，Deep Agents 还提供了 `SummarizationToolMiddleware`。它向代理暴露一个 `compact_conversation` 工具，让代理可以主动地在合适的时机（例如完成一个子任务后）触发摘要，变被动为主动。
 
-![deepseek\_mermaid\_20260425\_e4581a\.png](图片和附件/deepseek_mermaid_20260425_e4581a.png)
+![deepseek\_mermaid\_20260425\_e4581a\.png](./images/36从Agent到手撕OpenClaw的企业实战_deepseek_mermaid_20260425_e4581a_b5b0f5.png)
 
 **Deep Agents 使用 checkpointer 机制自动持久化每一次对话，因此天然支持情景记忆。你可以通过工具包装线程搜索，让智能体查询历史对话。**
 

@@ -27,7 +27,7 @@
 
 ## 二、 项目目录结构与模块功能解析
 
-```
+```python
 Multimodal_RAG/
 ├── dots_ocr/                      # 1. 复杂 PDF / 图像 OCR 解析模块
 │   ├── parser.py & my_parser.py   # Dots OCR 核心解析算法，拆解 PDF 为 MD 与导出关联图片
